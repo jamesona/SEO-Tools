@@ -26,15 +26,19 @@ for dom; do
 
   # Parse domain
   ##############
-  dom=$(sed 's/^h\?t\?t\?p\?:\?\/\?\/\?//' <<< $dom | sed 's/\/.*$//' | rev | cut -d"." -f1-2 | rev)
+  dom=$(sed 's/^h\?t\?t\?p\?s\?:\?\/\?\/\?//' <<< $dom | sed 's/\/.*$//' | rev | cut -d"." -f1-2 | rev)
 
   # Get domain registration date
   ##############################
   created=$(date '+%B %d, %Y' -d `whois $dom | egrep -o 'Creation Date: [0-9\-]{10}'|sed 's/Creation Date: //'`)
 
-  # Get backlinks (parsed from google search result page)
-  #######################################################
-  backlinks=$(curl -A Mozilla -s --get --data-urlencode "q=site:$dom" http://www.google.ca/search | egrep -o '<div class="sd" id="resultStats">[^<]+</div>' | sed 's/<\/\?[^>]\+>//g' | sed 's/[a-zA-Z ]//g')
+  # Get indexed links (parsed from google search result page)
+  ###########################################################
+  linkindex=$(curl -A Mozilla -s --get --data-urlencode "q=site:$dom" http://www.google.ca/search | egrep -o '<div class="sd" id="resultStats">[^<]+</div>' | sed 's/<\/\?[^>]\+>//g' | sed 's/[a-zA-Z ]//g')
+
+  # Get backlinks
+  ###############
+  backlinks=$(curl -s "http://en.seokicks.de/backlinks/$dom" | egrep -uo "Link pop [[:digit:]]+" | cut -d" " -f3)
 
   # Get PageRank
   ##############
@@ -45,7 +49,9 @@ for dom; do
   #################
   echo "===  $dom  ==="
   echo "Created: $created"
+  echo "Indexed Links: $linkindex"
   echo "Backlinks: $backlinks"
   echo "PageRank: $pagerank"
-
+  
 done
+
