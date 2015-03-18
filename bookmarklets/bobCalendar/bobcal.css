@@ -1,1 +1,90 @@
+#modalShade,body {
+  width:100%;
+  height:100%
+}
 
+#modalShade {
+  z-index:9;
+  position:fixed;
+  top:0;
+  left:0;
+  background:rgba(0,0,0,.3);
+  pointer-events:none
+}
+
+#modalShade>table {
+  width:60%;
+  margin:5em 20%;
+  border:1px solid rgba(0,0,0,0);
+  box-shadow:0 0 10px 2px rgba(0,0,0,.55);
+  pointer-events:initial;
+  background:rgba(50,50,50,1);
+  border-collapse:collapse 
+} 
+#modalShade>table th {
+  color:#fff;
+  margin:0;
+  padding:10px;
+  font-family:Arial,sans-serif;
+}
+#modalShade>table>tbody>tr:nth-child(1)>th {
+  text-indent: -90px;
+}
+#modalShade>table>tbody>tr:nth-child(1)>th>button:nth-child(1){
+  width:20px;
+  float:right
+}
+#modalShade>table>tbody>tr:nth-child(1)>th>button{
+  border:none;
+  background:#5a5a5a;
+  border-radius:
+  5px;color:#fff;
+  height:20px;
+  float:left;
+  margin-right:10px;
+}
+.calendar-table{
+  background:#fff;
+  width:100%!important
+}
+.calendar-table button{
+  border:none;
+  background:#1e1e1e;
+  border-radius:5px;
+  color:#fff;
+  width:20px;
+  height:20px;
+}
+.calendar-table{
+  border-collapse:collapse
+}
+.calendar-header{
+  font-size:125%;
+  font-weight:600;
+  text-align:center
+}
+#modalShade>table table.calendar-table,#modalShade>table>tbody>tr>td>table>thead>tr.calendar-title>th{
+  color:#000;
+  font-family:Arial,arial,helvetica,sans-serif
+}
+.calendar-day{
+  border:1px solid #000;
+  width:10em;
+  height:8em;
+  vertical-align:top;
+  padding:0;
+  text-align:center
+}
+.calendar-day span{
+  margin:2px;
+  font-weight:600
+}
+.calendar-day>div{
+  position:relative;
+  top:-1px;
+  right:-1px;
+  float:right;
+  width:2em;
+  text-align:center;
+  border:1px solid #000
+}
