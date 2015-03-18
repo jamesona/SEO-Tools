@@ -1,4 +1,4 @@
 (function() {
-  var app = angular.module('calendar', ['ngRoute']);
+  var calendar = angular.module('calendar', ['ngRoute']);
 
 })();
