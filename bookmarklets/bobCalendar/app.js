@@ -1,1 +1,4 @@
-var app = angular.module('calendar', ['ngRoute']);
+(function() {
+  var app = angular.module('calendar', ['ngRoute']);
+
+})();
