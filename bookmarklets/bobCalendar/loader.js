@@ -7,4 +7,10 @@ var html = document.getElementsByTagName('html')[0]; html.setAttribute('ng-app',
   var url = 'https://rawgit.com/jamesona/SEO-Tools/Book-Of-Business/bookmarklets/bobCalendar/app.js';
   document.head.appendChild(document.createElement('script')).src=url;
 })();
-body.innerHTML += "<p>{{'this is a '+'string'}}</p>";
+
+(function() {
+  var calendar = angular.module('calendar', ['ngRoute']);
+  
+  body.innerHTML += "<p>{{'this is a '+'string'}}</p>";
+
+})();
