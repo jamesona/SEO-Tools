@@ -1,4 +1,4 @@
-var body = document.getElementsByTagName('body')[0]; body.setAttribute('ng-app', 'calendar');
+var html = document.getElementsByTagName('html')[0]; html.setAttribute('ng-app', 'calendar');
 (function(){
   var url = 'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js';
   document.head.appendChild(document.createElement('script')).src=url;
