@@ -1,4 +1,4 @@
-var html = document.getElementsByTagName('html')[0]; html.setAttribute('ng-app', 'calendar');
+
 (function(){
   var url = 'https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.js';
   document.head.appendChild(document.createElement('script')).src=url;
@@ -10,6 +10,8 @@ var html = document.getElementsByTagName('html')[0]; html.setAttribute('ng-app',
 
 (function() {
   var calendar = angular.module('calendar', ['ngRoute']);
+  
+  var html = document.getElementsByTagName('html')[0]; html.setAttribute('ng-app', 'calendar');
   
   body.innerHTML += "<p>{{'this is a '+'string'}}</p>";
 
