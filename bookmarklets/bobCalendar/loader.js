@@ -4,7 +4,7 @@ var body = document.getElementsByTagName('body')[0]; body.setAttribute('ng-app',
   document.body.appendChild(document.createElement('script')).src=url;
 })();
 (function(){
-  var url = 'https://cdn.rawgit.com/jamesona/SEO-Tools/Book-Of-Business/bookmarklets/bobCalendar/app.js';
+  var url = 'https://rawgit.com/jamesona/SEO-Tools/Book-Of-Business/bookmarklets/bobCalendar/app.js';
   document.body.appendChild(document.createElement('script')).src=url;
 })();
 body.innerHTML += "<p>{{'this is a '+'string'}}</p>";
