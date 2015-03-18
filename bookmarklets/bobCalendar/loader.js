@@ -1,6 +1,6 @@
 (function(){
   (function(){
-    var url = '  https://rawgit.com/jamesona/SEO-Tools/Book-Of-Business/bookmarklets/bobCalendar/bobcal.css';
+    var url = 'https://rawgit.com/jamesona/SEO-Tools/Book-Of-Business/bookmarklets/bobCalendar/bobcal.css';
     document.head.appendChild(document.createElement('link')).href=url;
   })();
   function Calendar(ele, month, year) {
