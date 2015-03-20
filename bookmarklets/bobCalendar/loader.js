@@ -1,9 +1,9 @@
-// call using the following enclosure:
+/* call using the following enclosure:
 (function(){
   var url = 'https://rawgit.com/jamesona/SEO-Tools/Book-Of-Business/bookmarklets/bobCalendar/loader.js';
   document.head.appendChild(document.createElement('script')).src=url;
 })();
-// End enclosure
+*/
 (function(){
   // load parser class
   var BobParse = function(){ 
@@ -150,7 +150,7 @@
 	style.innerHTML += '#modal .calendar{background:#fff;width:100%;height:80%;em;border-collapse:collapse;padding:0px;margin:0;}';
 	style.innerHTML += '#modal .calendar td {border:1px solid black;width:14%;vertical-align:top;padding:5px;}';
 	style.innerHTML += '#modal .calendar td div {float:right;border:1px solid black;width:1.5em;height:1.5em;margin:-6px;text-align:center;vertical-align:middle;}';
-	style.innerHTML += '#modal .calendar td p {font-weight:bold;text-align:center;}'
+	style.innerHTML += '#modal .calendar td p {font-weight:bold;text-align:center;}';
 	modal.attach();
   modal.modalBox.appendChild(style);
   calendar.draw(modal.modalBody);
