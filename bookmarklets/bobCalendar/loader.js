@@ -149,7 +149,7 @@
 	style.innerHTML += '#modal>div, #modal>h1 {width: 70%;background:rgb(50,50,50);display:inline-block;margin:0;text-align: center;border:1px solid rgb(50,50,50);padding:5px;}';
 	style.innerHTML += '#modal>h1 {color:#fff;}'
 	style.innerHTML += '#modal .calendar{background:#fff;width:100%;border-collapse:collapse;padding:0px;margin:0;}';
-	style.innerHTML += '#modal .calendar th {height: 1.5em;}';
+	style.innerHTML += '#modal .calendar th, #modal .calendar tr .header td {height: 1em;}';
 	style.innerHTML += '#modal .calendar td {border:1px solid black;width:14%;vertical-align:top;padding:5px; height:8em;}';
 	style.innerHTML += '#modal .calendar td div {float:right;border:1px solid black;width:1.5em;height:1.5em;margin:-6px;text-align:center;vertical-align:middle;}';
 	style.innerHTML += '#modal .calendar td p {font-weight:bold;text-align:center;}';
