@@ -144,7 +144,7 @@
   };
   var date = new Date(), modal = new Modal('Client Calendar'), calendar = new Calendar(date.getMonth(),date.getFullYear(),new BobParse().dates), style = document.createElement('style');
 	style.innerHTML = 'body, #modal {width:100%;height:100%;padding:0;margin:0;}';
-  style.innerHTML += '#modal {z-index:9;position:fixed;top:0;left:0;background:rgba(0,0,0,.3);font-family: sans-serif;background: rgba(0,0,0,0.5);padding-top:5em;}';
+  style.innerHTML += '#modal {z-index:9;position:fixed;top:0;left:0;padding-left:15%;background:rgba(0,0,0,.3);font-family: sans-serif;background: rgba(0,0,0,0.5);padding-top:5em;}';
   style.innerHTML += '#modal button {float:right;}';
 	style.innerHTML += '#modal>div, #modal>h1 {width: 70%;background:rgb(50,50,50);display:inline-block;margin:0;text-align: center;border:1px solid rgb(50,50,50);padding:5px;}';
 	style.innerHTML += '#modal>h1 {color:#fff;}'
