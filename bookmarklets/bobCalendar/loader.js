@@ -144,12 +144,13 @@
   };
   var date = new Date(), modal = new Modal('Client Calendar'), calendar = new Calendar(date.getMonth(),date.getFullYear(),new BobParse().dates), style = document.createElement('style');
 	style.innerHTML = 'body, #modal {width:100%;height:100%;padding:0;margin:0;}';
-  style.innerHTML += '#modal {z-index:9;position:fixed;top:0;left:0;background:rgba(0,0,0,.3);pointer-events:none;font-family: sans-serif;background: rgba(0,0,0,0.5);padding-top:5em;}';
+  style.innerHTML += '#modal {z-index:9;position:fixed;top:0;left:0;background:rgba(0,0,0,.3);font-family: sans-serif;background: rgba(0,0,0,0.5);padding-top:5em;}';
   style.innerHTML += '#modal button {float:right;}';
-	style.innerHTML += '#modal>div, #modal>h1 {width: 70%;background:rgb(50,50,50);display:inline-block;margin:0;text-align: center;margin-left:15%;border:1px solid rgb(50,50,50);padding:5px;}';
+	style.innerHTML += '#modal>div, #modal>h1 {width: 70%;background:rgb(50,50,50);display:inline-block;margin:0;text-align: center;border:1px solid rgb(50,50,50);padding:5px;}';
 	style.innerHTML += '#modal>h1 {color:#fff;}'
-	style.innerHTML += '#modal .calendar{background:#fff;width:100%;height:80%;em;border-collapse:collapse;padding:0px;margin:0;}';
-	style.innerHTML += '#modal .calendar td {border:1px solid black;width:14%;vertical-align:top;padding:5px;}';
+	style.innerHTML += '#modal .calendar{background:#fff;width:100%;border-collapse:collapse;padding:0px;margin:0;}';
+	style.innerHTML += '#modal .calendar th {height: 1.5em;}';
+	style.innerHTML += '#modal .calendar td {border:1px solid black;width:14%;vertical-align:top;padding:5px; height:8em;}';
 	style.innerHTML += '#modal .calendar td div {float:right;border:1px solid black;width:1.5em;height:1.5em;margin:-6px;text-align:center;vertical-align:middle;}';
 	style.innerHTML += '#modal .calendar td p {font-weight:bold;text-align:center;}';
 	modal.attach();
