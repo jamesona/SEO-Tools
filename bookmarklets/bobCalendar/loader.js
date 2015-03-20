@@ -3,7 +3,7 @@
   var url = 'https://rawgit.com/jamesona/SEO-Tools/Book-Of-Business/bookmarklets/bobCalendar/loader.js';
   document.head.appendChild(document.createElement('script')).src=url;
 })();
-// \\ End enclosure
+// End enclosure
 (function(){
   // load parser class
   var BobParse = function(){ 
