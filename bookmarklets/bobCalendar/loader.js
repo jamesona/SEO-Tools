@@ -4,7 +4,6 @@
   document.head.appendChild(document.createElement('script')).src=url;
 })();
 // \\ End enclosure
-})();
 (function(){
   // load parser class
   var BobParse = function(){ 
