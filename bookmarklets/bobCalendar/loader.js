@@ -93,11 +93,11 @@
   		this.table.setAttribute('class', 'calendar');
   		this.table.appendChild(this.head);
   		this.head.appendChild(this.prev);
-  		this.prev.innerHTML = "&laquo;";
+  		this.prev.innerHTML = "Previous";
   		this.prev.id = 'prev';
   		this.head.appendChild(this.title);
   		this.head.appendChild(this.next);
-  		this.next.innerHTML = "&raquo";
+  		this.next.innerHTML = "Next";
   		this.next.id = 'next';
    
   		this.table.appendChild(this.days);
