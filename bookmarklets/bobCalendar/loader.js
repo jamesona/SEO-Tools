@@ -97,7 +97,7 @@
   		this.prev.id = 'prev';
   		this.head.appendChild(this.title);
   		this.head.appendChild(this.next);
-  		this.next.innerHTML = "&#187";
+  		this.next.innerHTML = "&#187;";
   		this.next.id = 'next';
    
   		this.table.appendChild(this.days);
