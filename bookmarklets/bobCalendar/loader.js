@@ -93,15 +93,15 @@
   		this.table.setAttribute('class', 'calendar');
   		this.table.appendChild(this.head);
   		this.head.appendChild(this.prev);
-  		this.prev.innerHTML = "Previous";
+  		this.prev.innerHTML = "&#171;";
   		this.prev.id = 'prev';
   		this.head.appendChild(this.title);
   		this.head.appendChild(this.next);
-  		this.next.innerHTML = "Next";
+  		this.next.innerHTML = "&#187";
   		this.next.id = 'next';
    
   		this.table.appendChild(this.days);
-  		this.title.innerHTML = this.month_labels[this.month] + "&nbsp;" + this.year;
+  		this.title.innerHTML = this.month_labels[this.month] + "&#160;" + this.year;
   		this.title.setAttribute('colspan', '5');
   		this.days.setAttribute('class', 'header');
   		for (var i = 0; i <= 6; i++ ) this.cells += '<td>' + this.day_labels[i] + '</td>';
