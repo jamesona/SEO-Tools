@@ -140,6 +140,19 @@
           cal.month++;
   				cal.draw(cal.node);
         });
+      	document.onkeydown = function(e) {
+          e = e || window.event;
+          if (e.keyCode == '37') {
+            // left arrow
+            cal.month--;
+            cal.draw(cal.node);
+          }
+          else if (e.keyCode == '39') {
+            // right arrow
+            cal.month++;
+        		cal.draw(cal.node);
+          }
+        };
       })();
   	};
   };
@@ -152,7 +165,7 @@
     style.innerHTML += '#modal>h1 {color:#fff;}'
     style.innerHTML += '#modal .calendar {background:#fff;width:100%;border-collapse:collapse;padding:0px;margin:0;}';
     style.innerHTML += '#modal .calendar thead > tr {border: 1px solid black;}';
-    style.innerHTML += '#modal .calendar th, #modal > div > table > tbody > tr.header > td {font-size: 1.2em;height: 1em;}';
+    style.innerHTML += '#modal .calendar th, #modal > div > table > tbody > tr.header > td {text-align: center;font-size: 1.2em;height: 1em;}';
     style.innerHTML += '#modal .calendar td {border:1px solid black;width:14%;vertical-align:top;padding:5px; height:8em;}';
     style.innerHTML += '#modal .calendar td div {float:right;border:1px solid black;width:1.5em;height:1.5em;margin:-6px;text-align:center;vertical-align:middle;}';
     style.innerHTML += '#modal .calendar td p {font-weight:bold;text-align:center;}';
