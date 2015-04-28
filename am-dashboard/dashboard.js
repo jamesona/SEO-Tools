@@ -15,27 +15,27 @@ function Dashboard() {
 			}
 		}
     return element;
-    };
+  };
 	
 
-    this.getTickets = function(){
-		return ko.dataFor(app).contentViewModel().myTickets();
+  this.getTickets = function(){
+		return ko.dataFor(app).statsViewModel().myTickets();
 	};
 
-    this.getCritical = function(){
-      var tickets = this.getTickets(),
-          critical = [];
-      for (var i=0;i<tickets.length;i++){
-          if (tickets[i].ScheduledEndDate < new Date()){
-              critical.push(tickets[i]);
-          } 
-      }
-      return critical;
-    };
+  this.getCritical = function(){
+    var tickets = this.getTickets(),
+        critical = [];
+    for (var i=0;i<tickets.length;i++){
+      if (tickets[i].ScheduledEndDate < new Date()){
+          critical.push(tickets[i]);
+      } 
+    }
+    return critical;
+  };
 
-    this.openClient = function(client){
-        ko.dataFor(app).showManageCustomer(client);
-    };    
+  this.openClient = function(client){
+    ko.dataFor(app).showManageCustomer(client);
+  };    
 
     this.closeClient = function (){
         var buttons = document.getElementsByClassName('close'),
@@ -44,29 +44,29 @@ function Dashboard() {
     };
 	
   this.Dashboard = this.createElement(document.body, 'div', {
-      className: 'navbar navbar-inverse navbar-fixed-bottom',
-      id: 'dashboard',
+    className: 'navbar navbar-inverse navbar-fixed-bottom',
+    id: 'dashboard',
 	});
   this.Nav = this.createElement(this.Dashboard, 'ul', {
-      className: 'nav navbar-nav',
+    className: 'nav navbar-nav',
 	});
   this.Style = this.createElement(this.Nav, 'link', {
-      rel: 'stylesheet',
-      type: 'text/css',
-      href: 'https://rawgit.com/jamesona/SEO-Tools/master/am-dashboard/dashboard.css',
+    rel: 'stylesheet',
+    type: 'text/css',
+    href: 'https://rawgit.com/jamesona/SEO-Tools/master/am-dashboard/dashboard.css',
 	});
   this.Tools = this.createElement(this.Nav, 'li',{
-      innerHTML: '<a>Tools</a>',
+    innerHTML: '<a>Tools</a>',
   });
   this.Tickets = this.createElement(this.Nav, 'li',{
-      innerHTML: '<a>Tickets</a>',
+    innerHTML: '<a>Tickets</a>',
   });
   this.Calendar = this.createElement(this.Nav, 'li',{
-      innerHTML: '<a>Calendar</a>',
+    innerHTML: '<a>Calendar</a>',
   });
   this.Critical = this.createElement(this.Nav, 'li',{
-      innerHTML: '<a>Click to get Critical</a>',
-      id: 'critical',
-      onclick: function(){this.innerHTML = '<a>Critical Tickets: <span style="color: #ff8888;font-weight: bolder;">'+db.getCritical().length+'</span></a>';}
+    innerHTML: '<a>Click to get Critical</a>',
+    id: 'critical',
+    onclick: function(){this.innerHTML = '<a>Critical Tickets: <span style="color: #ff8888;font-weight: bolder;">'+db.getCritical().length+'</span></a>';}
   });
 }
