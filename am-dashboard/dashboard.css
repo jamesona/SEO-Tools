@@ -1,3 +1,6 @@
-#dashboard > li {
-  display: inline;
+#dashboard > ul {
+  width: 100%;
+}
+#critical {
+  float: right;
 }
