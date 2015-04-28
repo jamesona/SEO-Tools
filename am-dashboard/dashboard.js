@@ -49,5 +49,4 @@ function Dashboard() {
   this.Tickets = this.createElement(this.Nav, 'li');
   this.Calendar = this.createElement(this.Nav, 'li');
   this.Critical = this.createElement(this.Nav, 'li');
-	
 }
