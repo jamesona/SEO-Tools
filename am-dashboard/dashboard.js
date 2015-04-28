@@ -1,6 +1,6 @@
 /* call using the following enclosure:
 (function(){
-  var url = 'https://rawgit.com/jamesona/SEO-Tools/am-dashboard/dashboard.js';
+  var url = 'https://rawgit.com/jamesona/SEO-Tools/master/am-dashboard/dashboard.js';
   document.head.appendChild(document.createElement('script')).src=url;
 })();
 */
