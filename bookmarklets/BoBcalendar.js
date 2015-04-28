@@ -9,6 +9,7 @@
   var BobParse = function(){ 
       this.dates = {}; 
       this.raw = prompt('Copy all data (Ctrl+A, Ctrl+C) and paste'); 
+      if ( this.raw == null ) return;
       this.parse = this.raw.split("\n").filter(function(str){return (/\S/).test(str);}); 
       this.parse.shift(); this.parse.shift(); 
       for (var l=0; l < this.parse.length; l++){ 
@@ -142,19 +143,21 @@
       })();
   	};
   };
-  var date = new Date(), modal = new Modal('Client Calendar'), calendar = new Calendar(date.getMonth(),date.getFullYear(),new BobParse().dates), style = document.createElement('style');
-	style.innerHTML = 'body, #modal {width:100%;height:100%;padding:0;margin:0;}';
-  style.innerHTML += '#modal {z-index:9999999;position:fixed;top:0;left:0;padding-left:15vw;background:rgba(0,0,0,.3);font-family: sans-serif;background: rgba(0,0,0,0.5);padding-top:5em;}';
-  style.innerHTML += '#modal button {float:right;}';
-	style.innerHTML += '#modal>div, #modal>h1 {width: 70%;background:rgb(50,50,50);display:inline-block;margin:0;text-align: center;border:1px solid rgb(50,50,50);padding:5px;}';
-	style.innerHTML += '#modal>h1 {color:#fff;}'
-	style.innerHTML += '#modal .calendar {background:#fff;width:100%;border-collapse:collapse;padding:0px;margin:0;}';
-	style.innerHTML += '#modal .calendar thead > tr {border: 1px solid black;}';
-	style.innerHTML += '#modal .calendar th, #modal > div > table > tbody > tr.header > td {font-size: 1.2em;height: 1em;}';
-	style.innerHTML += '#modal .calendar td {border:1px solid black;width:14%;vertical-align:top;padding:5px; height:8em;}';
-	style.innerHTML += '#modal .calendar td div {float:right;border:1px solid black;width:1.5em;height:1.5em;margin:-6px;text-align:center;vertical-align:middle;}';
-	style.innerHTML += '#modal .calendar td p {font-weight:bold;text-align:center;}';
-	modal.attach();
-  modal.modalBox.appendChild(style);
-  calendar.draw(modal.modalBody);
+  var data = new BobParse().dates; if ( Object.keys(data).length === 0 ) {return;} else {
+    var date = new Date(), modal = new Modal('Client Calendar'), calendar = new Calendar(date.getMonth(),date.getFullYear(),data), style = document.createElement('style');
+    style.innerHTML = 'body, #modal {width:100%;height:100%;padding:0;margin:0;}';
+    style.innerHTML += '#modal {z-index:9999999;position:fixed;top:0;left:0;padding-left:15vw;background:rgba(0,0,0,.3);font-family: sans-serif;background: rgba(0,0,0,0.5);padding-top:5em;}';
+    style.innerHTML += '#modal button {float:right;}';
+    style.innerHTML += '#modal>div, #modal>h1 {width: 70%;background:rgb(50,50,50);display:inline-block;margin:0;text-align: center;border:1px solid rgb(50,50,50);padding:5px;}';
+    style.innerHTML += '#modal>h1 {color:#fff;}'
+    style.innerHTML += '#modal .calendar {background:#fff;width:100%;border-collapse:collapse;padding:0px;margin:0;}';
+    style.innerHTML += '#modal .calendar thead > tr {border: 1px solid black;}';
+    style.innerHTML += '#modal .calendar th, #modal > div > table > tbody > tr.header > td {font-size: 1.2em;height: 1em;}';
+    style.innerHTML += '#modal .calendar td {border:1px solid black;width:14%;vertical-align:top;padding:5px; height:8em;}';
+    style.innerHTML += '#modal .calendar td div {float:right;border:1px solid black;width:1.5em;height:1.5em;margin:-6px;text-align:center;vertical-align:middle;}';
+    style.innerHTML += '#modal .calendar td p {font-weight:bold;text-align:center;}';
+    modal.attach();
+    modal.modalBox.appendChild(style);
+    calendar.draw(modal.modalBody);
+  }
 })();
