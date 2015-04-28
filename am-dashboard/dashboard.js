@@ -19,7 +19,7 @@ function Dashboard() {
 	
 
   this.getTickets = function(){
-		return ko.dataFor(app).statsViewModel().myTickets();
+		return ko.dataFor(app).contentViewModel().myTickets();
 	};
 
   this.getCritical = function(){
