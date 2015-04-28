@@ -15,38 +15,58 @@ function Dashboard() {
 			}
 		}
     return element;
-  };
+    };
 	
-	this.getCSS = function httpGet() {
-			if (window.XMLHttpRequest)
-			{// code for IE7+, Firefox, Chrome, Opera, Safari
-					xmlhttp=new XMLHttpRequest();
-			}
-			else
-			{// code for IE6, IE5
-					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			xmlhttp.onreadystatechange=function()
-			{
-					if (xmlhttp.readyState==4 && xmlhttp.status==200)
-					{
-							return xmlhttp.responseText;
-					}
-			};
-			xmlhttp.open("GET", "https://rawgit.com/jamesona/SEO-Tools/am-dashboard/dashboard.css", false );
-			xmlhttp.send();    
+
+    this.getTickets = function(){
+		return ko.dataFor(app).contentViewModel().myTickets();
 	};
+
+    this.getCritical = function(){
+      var tickets = this.getTickets(),
+          critical = [];
+      for (var i=0;i<tickets.length;i++){
+          if (tickets[i].ScheduledEndDate < new Date()){
+              critical.push(tickets[i]);
+          } 
+      }
+      return critical;
+    };
+
+    this.openClient = function(client){
+        ko.dataFor(app).showManageCustomer(client);
+    };    
+
+    this.closeClient = function (){
+        var buttons = document.getElementsByClassName('close'),
+            i = buttons.length - 1;
+        if (i >= 1) buttons[i-1].click();
+    };
 	
-	
-  this.Nav = this.createElement(document.body, 'ul', {
-		className: 'navbar navbar-inverse navbar-fixed-bottom',
-		id: 'dashboard',
+  this.Dashboard = this.createElement(document.body, 'div', {
+      className: 'navbar navbar-inverse navbar-fixed-bottom',
+      id: 'dashboard',
 	});
-	this.Style = this.createElement(this.Nav, 'style', {
-		innerHTML: this.getCSS(),
+  this.Nav = this.createElement(this.Dashboard, 'ul', {
+      className: 'nav navbar-nav',
 	});
-  this.Tools = this.createElement(this.Nav, 'li');
-  this.Tickets = this.createElement(this.Nav, 'li');
-  this.Calendar = this.createElement(this.Nav, 'li');
-  this.Critical = this.createElement(this.Nav, 'li');
+  this.Style = this.createElement(this.Nav, 'link', {
+      rel: 'stylesheet',
+      type: 'text/css',
+      href: 'https://rawgit.com/jamesona/SEO-Tools/master/am-dashboard/dashboard.css',
+	});
+  this.Tools = this.createElement(this.Nav, 'li',{
+      innerHTML: '<a>Tools</a>',
+  });
+  this.Tickets = this.createElement(this.Nav, 'li',{
+      innerHTML: '<a>Tickets</a>',
+  });
+  this.Calendar = this.createElement(this.Nav, 'li',{
+      innerHTML: '<a>Calendar</a>',
+  });
+  this.Critical = this.createElement(this.Nav, 'li',{
+      innerHTML: '<a>Click to get Critical</a>',
+      id: 'critical',
+      onclick: function(){this.innerHTML = '<a>Critical Tickets: <span style="color: #ff8888;font-weight: bolder;">'+db.getCritical().length+'</span></a>';}
+  });
 }
