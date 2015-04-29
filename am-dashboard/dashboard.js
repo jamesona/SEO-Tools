@@ -155,7 +155,7 @@ function Dashboard() {
 		innerHTML: '<a>Calendar</a>',
 		onclick: function(){
 			var node = bootbox.alert('none')[0].children[0].children[0].children[0],
-			calendar = self.calendar(self.Tickets.sortTickets());
+			calendar = new self.calendar();
 			calendar.draw(node);
 			calendar.registerTriggers(node);
 		}
