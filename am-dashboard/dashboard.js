@@ -173,6 +173,7 @@ function Dashboard() {
 			return critical;
 		},
 		sortTickets: function(){
+			var data = [];
 			for (var i=0;i<db.Tickets.ticketArray.length;i++){
 				if (! self.Tickets.ticketArray) this.getTickets();
 				var ticket = self.Tickets.ticketArray[i],
@@ -181,6 +182,7 @@ function Dashboard() {
 				if (! data[day]){ data[day] = []};
 				data[day].push(ticket);
 			}
+			return data;
 		}
 	}
 }
