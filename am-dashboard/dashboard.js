@@ -168,7 +168,9 @@ function Dashboard() {
 		}
 	});
 	this.HTML.critical = this.createElement(this.HTML.nav, 'li', {
-		innerHTML: '<a>Click to get Critical</a>',
+		innerHTML: (function(){
+			if (test) {return '<a>Click to get Critical</a>';} 
+			else {this.click();}})();
 		id: 'critical',
 		onclick: function() {
 			var criticals = self.Tickets.getCritical();
