@@ -10,20 +10,6 @@
 
 function Dashboard() {
   var self = this;
-  this.tryCache = function(){
-    if (self.Tickets.ticketArray) {
-      localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
-    }
-  };
-  this.createElement = function(parent, tag, attributes) {
-    var element = parent.appendChild(document.createElement(tag));
-    for (var attribute in attributes) {
-      if (attributes.hasOwnProperty(attribute)) {
-        element[attribute] = attributes[attribute];
-      }
-    }
-    return element;
-  };
   this.openClient = function(client) {
     ko.dataFor(app).showManageCustomer(client);
   };
@@ -197,9 +183,24 @@ function Dashboard() {
       }
       return list;
     },
+    tryCache = function(){
+      if (self.Tickets.ticketArray) {
+        localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
+      }
+    },
   };
   
   this.HTML = {
+      createElement = function(parent, tag, attributes) {
+        console.log(tag+' added to '+parent);
+        var element = parent.appendChild(document.createElement(tag));
+        for (var attribute in attributes) {
+          if (attributes.hasOwnProperty(attribute)) {
+            element[attribute] = attributes[attribute];
+          }
+        }
+        return element;
+      }
       dashboard: self.createElement(document.body, 'div', {
         className: 'navbar navbar-inverse navbar-fixed-bottom',
         id: 'dashboard',
@@ -243,10 +244,10 @@ function Dashboard() {
   };
 
   window.beforeunload = function(){
-    this.tryCache();
+    this.Tickets.tryCache();
   };
   window.onhashchange = function(){
-    this.tryCache();  
+    this.Tickets.tryCache();  
   };
   if (localStorage.ticketCache) self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
 }
