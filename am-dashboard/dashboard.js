@@ -189,7 +189,7 @@ function Dashboard() {
 					alert('Able to load tickets from browser cache');
 				}
 			} 
-			if (self.ticketArray) {
+			if (self.Tickets.ticketArray) {
 				localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
 				alert('Updated browser ticket cache');
 				return self.Tickets.ticketArray;
