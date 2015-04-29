@@ -164,7 +164,7 @@ function Dashboard() {
 		},
 		getCritical: function() {
 			var tickets = this.getTickets(),
-			    critical = [];
+			critical = [];
 			for (var i = 0; i < tickets.length; i++) {
 				if (tickets[i].ScheduledEndDate < new Date()) {
 					critical.push(tickets[i]);
@@ -174,8 +174,8 @@ function Dashboard() {
 		},
 		sortTickets: function(){
 			var data = [];
+			if (! self.Tickets.ticketArray) this.getTickets();
 			for (var i=0;i<db.Tickets.ticketArray.length;i++){
-				if (! self.Tickets.ticketArray) this.getTickets();
 				var ticket = self.Tickets.ticketArray[i],
 				date = new Date(ticket.ScheduledEndDate),
 				day = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
