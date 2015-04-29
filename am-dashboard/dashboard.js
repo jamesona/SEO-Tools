@@ -1,3 +1,13 @@
+/* call using this enclosure
+  (function(){  
+    var url = 'https://rawgit.com/jamesona/SEO-Tools/master/am-dashboard/dashboard.js';
+    document.head.appendChild(document.createElement('script')).src=url;
+    function initialize(){if (typeof(Dashboard) !== 'undefined') {var db = new Dashboard()}
+    else {setTimeout(function(){initialize()}, 100);}}
+    initialize();
+  })();
+*/
+
 function Dashboard() {
 	var self = this;
 	this.tryCache = function(){
@@ -23,7 +33,7 @@ function Dashboard() {
 		if (i >= 1) buttons[i - 1].click();
 	};
 	this.calendar = function(month, year, data) {
-		if (typeof(month) == Object) data = month, month = null;
+    if (typeof(month) == Object) {data = month, month = null;}
 		this.current_date = new Date();
 		this.day_labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 		this.month_labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -85,9 +95,9 @@ function Dashboard() {
 	  		html += '</tr>';
 	  		this.table.innerHTML += html;
 	  		if (ele) {
-	  			ele.innerHTML = this.table.outerHTML
+	  			ele.innerHTML = this.table.outerHTML;
 	  		} else {
-	  			return this.table.outerHTML
+	  			return this.table.outerHTML;
 	  		}
 	  		// save reference to dom node in object
 	  		this.node = ele;
@@ -118,6 +128,75 @@ function Dashboard() {
 			        };
 	      		})();
 	  	};
+	};
+	
+	this.Tickets = {
+		getTickets: function() {
+			//get tickets
+			if (typeof(ko.dataFor(app).contentViewModel().myTickets) === "function"){
+				self.Tickets.ticketArray = ko.dataFor(app).contentViewModel().myTickets();
+			} else if (localStorage.ticketCache) {
+				self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
+			}
+			//return results
+			if (self.Tickets.ticketArray) {
+				localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
+				return self.Tickets.ticketArray;
+			} else {
+				alert('Unable to access tickets at this time!');
+				return [];
+			}
+		},
+		getCritical: function() {
+			var tickets = this.getTickets(),
+			critical = [];
+			for (var i = 0; i < tickets.length; i++) {
+				if (tickets[i].ScheduledEndDate < new Date()) {
+					critical.push(tickets[i]);
+				}
+			}
+			if (tickets.length > 0){
+				return critical;
+			} else {
+				return false;	
+			}
+		},
+		countCritical: function() {
+			var criticals = self.Tickets.getCritical();
+			if (criticals) {
+				return '<a>Critical Tickets: <span style="color: #ff8888;font-weight: bolder;">' + criticals.length + '</span></a>';
+			} else {
+				return '<a>Error loading tickets!</a>';
+			}
+		},
+		sortTickets: function(tickets){
+			if (! tickets){
+				tickets = this.getTickets();
+			}
+			var data = {};
+			for (var i=0;i<tickets.length;i++){
+				var ticket = tickets[i],
+				date = new Date(ticket.ScheduledEndDate),
+				day = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
+				if (! data[day]){ data[day] = [];}
+				data[day].push(ticket);
+			}
+			return data;
+		},
+		listTickets: function(tickets){
+			var list = document.createElement('ul');
+			for (var i=0;i<tickets.length;i++){
+				var ticket = tickets[i],
+				listItem = document.createElement('li'),
+				text = ticket.CompanyName+': '+ticket.TicketTypeName;
+				text += ' (Due: '+(ticket.ScheduledEndDate.getMonth()+1);
+				text += '/'+ticket.ScheduledEndDate.getDate()+'/';
+				text += ticket.ScheduledEndDate.getFullYear()+')';
+				listItem.innerHTML = text;
+				list.appendChild(listItem);
+			}
+			return list;
+		},
 	};
 	
 	this.HTML = {};
@@ -162,74 +241,6 @@ function Dashboard() {
 		onclick: self.Tickets.countCritical(),
 	});
 
-	this.Tickets = {
-		getTickets: function() {
-			//get tickets
-			if (typeof(ko.dataFor(app).contentViewModel().myTickets) === "function"){
-				self.Tickets.ticketArray = ko.dataFor(app).contentViewModel().myTickets();
-			} else if (localStorage.ticketCache) {
-				self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
-			}
-			//return results
-			if (self.Tickets.ticketArray) {
-				localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
-				return self.Tickets.ticketArray;
-			} else {
-				alert('Unable to access tickets at this time!');
-				return [];
-			}
-		},
-		getCritical: function() {
-			var tickets = this.getTickets(),
-			critical = [];
-			for (var i = 0; i < tickets.length; i++) {
-				if (tickets[i].ScheduledEndDate < new Date()) {
-					critical.push(tickets[i]);
-				}
-			}
-			if (tickets.length > 0){
-				return critical;
-			} else {
-				return false;	
-			}
-		},
-		countCritical: function() {
-			var criticals = self.Tickets.getCritical();
-			if (criticals) {
-				return '<a>Critical Tickets: <span style="color: #ff8888;font-weight: bolder;">' + criticals.length + '</span></a>';
-			} else {
-				return '<a>Error loading tickets!</a>';
-			}
-		},
-		sortTickets: function(tickets){
-			if (! tickets){
-				var tickets = this.getTickets();
-			}
-			var data = {};
-			for (var i=0;i<tickets.length;i++){
-				var ticket = tickets[i],
-				date = new Date(ticket.ScheduledEndDate),
-				day = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
-				if (! data[day]){ data[day] = []};
-				data[day].push(ticket);
-			}
-			return data;
-		},
-		listTickets: function(tickets){
-			var list = document.createElement('ul');
-			for (var i=0;i<tickets.length;i++){
-				var ticket = tickets[i],
-				listItem = document.createElement('li'),
-				text = ticket.CompanyName+': '+ticket.TicketTypeName;
-				text += ' (Due: '+(ticket.ScheduledEndDate.getMonth()+1);
-				text += '/'+ticket.ScheduledEndDate.getDate()+'/';
-				text += ticket.ScheduledEndDate.getFullYear()+')';
-				listItem.innerHTML = text;
-				list.appendChild(listItem);
-			}
-			return list;
-		},
-	}
 	window.beforeunload = function(){
 		this.tryCache();
 	};
@@ -237,4 +248,4 @@ function Dashboard() {
 		this.tryCache();	
 	};
 	if (localStorage.ticketCache) self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
-}
+};
