@@ -87,7 +87,7 @@ function Dashboard() {
 			if (inLastRow) html += '<td colspan="' + inLastRow + '"></td>';
 			html += '</tr>';
 			this.table.innerHTML += html;
-			if (typeof(callback) == function) callback();
+			if (callback.constructor == 'function Function() { [native code] }') callback();
 		};
 		this.getContent = function(){
               		return this.table.outerHTML;
