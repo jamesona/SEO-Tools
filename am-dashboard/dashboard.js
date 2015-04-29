@@ -34,7 +34,7 @@ function Dashboard() {
 		this.month_labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 		this.month = (isNaN(month) || month === null) ? this.current_date.getMonth() : month;
 		this.year = (isNaN(year) || year === null) ? this.current_date.getFullYear() : year;
-		this.draw = function(callback) {
+		this.draw = function() {
 			if (this.month > 11) {
 				this.month -= 12;
 				this.year += 1;
@@ -87,10 +87,7 @@ function Dashboard() {
 			if (inLastRow) html += '<td colspan="' + inLastRow + '"></td>';
 			html += '</tr>';
 			this.table.innerHTML += html;
-			if (callback.constructor == 'function Function() { [native code] }') callback();
-		};
-		this.getContent = function(){
-              		return this.table.outerHTML;
+			ele.innerHTML
 		};
 		this.registerTriggers = function(ele){
 			// save reference to dom node in object
@@ -152,6 +149,12 @@ function Dashboard() {
 	});
 	this.HTML.ticketCalendar = this.createElement(this.HTML.ticketsMenu, 'li', {
 		innerHTML: '<a>Calendar</a>',
+		onclick: function(){
+			var node = bootbox.alert('none')[0].children[0].children[0].children[0],
+			calendar = self.calendar(self.Tickets.sortTickets());
+			calendar.draw(node);
+			calendar.registerTriggers(node);
+		}
 	});
 	this.HTML.critical = this.createElement(this.HTML.nav, 'li', {
 		innerHTML: '<a>Click to get Critical</a>',
