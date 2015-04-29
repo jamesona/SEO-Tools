@@ -185,22 +185,26 @@ function Dashboard() {
 				alert('Able to access launchpad tickets');
 				console.log(self.Tickets);
 				console.log(this);
+				console.log('Same: '+(self.Tickets == this));
 			} 
 			if (localStorage.ticketCache) {
 				//self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
 				alert('Able to load tickets from browser cache');
 				console.log(self.Tickets);
 				console.log(this);
+				console.log('Same: '+(self.Tickets == this));
 			}
 			
 			if (self.Tickets.ticketArray) {
 				//localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
 				alert('Updated browser ticket cache');
 				console.log(self.Tickets.ticketArray);
+				console.log('via self');
 				return self.Tickets.ticketArray;
 			} else if (this.ticketArray){
 				alert('Updated browser ticket cache');
 				console.log(this.ticketArray);
+				console.log('via this');
 				return this.ticketArray;
 			} else {
 				alert('Unable to access tickets at this time');
