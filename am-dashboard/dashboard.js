@@ -9,12 +9,6 @@
 
 function Dashboard() {
 	var self = this;
-	window.addEventListener("beforeunload", function(){
-		if (self.Tickets.ticketArray) {
-			localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
-		}
-	});
-	if (localStorage.ticketCache) self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
 	this.createElement = function(parent, tag, attributes) {
 		var element = parent.appendChild(document.createElement(tag));
 		for (var attribute in attributes) {
@@ -244,4 +238,10 @@ function Dashboard() {
 			return list;
 		},
 	}
+	window.addEventListener("beforeunload", function(){
+		if (self.Tickets.ticketArray) {
+			localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
+		}
+	});
+	if (localStorage.ticketCache) self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
 }
