@@ -181,20 +181,31 @@ function Dashboard() {
 	this.Tickets = {
 		getTickets: function() {
 			if (typeof(ko.dataFor(app).contentViewModel().myTickets) === "function"){
-				self.Tickets.ticketArray = ko.dataFor(app).contentViewModel().myTickets();
+				//self.Tickets.ticketArray = ko.dataFor(app).contentViewModel().myTickets();
 				alert('Able to access launchpad tickets');
-			} else {
-				if (localStorage.ticketCache) {
-					self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
-					alert('Able to load tickets from browser cache');
-				}
+				console.log(self.Tickets);
+				console.log(this);
 			} 
+			if (localStorage.ticketCache) {
+				//self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
+				alert('Able to load tickets from browser cache');
+				console.log(self.Tickets);
+				console.log(this);
+			}
+			
 			if (self.Tickets.ticketArray) {
-				localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
+				//localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
 				alert('Updated browser ticket cache');
+				console.log(self.Tickets.ticketArray);
 				return self.Tickets.ticketArray;
-			} else	{
+			} else if (this.ticketArray){
+				alert('Updated browser ticket cache');
+				console.log(this.ticketArray);
+				return this.ticketArray;
+			} else {
 				alert('Unable to access tickets at this time');
+				console.log(self.Tickets);
+				console.log(this);
 				return [];
 			}
 		},
