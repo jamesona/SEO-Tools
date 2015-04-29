@@ -174,8 +174,14 @@ function Dashboard() {
 		innerHTML: '<a>Click to get Critical</a>',
 		id: 'critical',
 		onclick: function() {
-			this.innerHTML = '<a>Critical Tickets: <span style="color: #ff8888;\
-        font-weight: bolder;">' + self.Tickets.getCritical().length + '</span></a>';
+			var criticals = self.Tickets.getCritical();
+			if (criticals) {
+				this.innerHTML = '<a>Critical Tickets: <span style="color: #ff8888;\
+        			font-weight: bolder;">' + criticals.length + '</span></a>';
+			} else {
+				this.innerHTML = '<a>Error loading tickets!</a>';
+			}
+				
 		},
 	});
 
@@ -227,7 +233,11 @@ function Dashboard() {
 					critical.push(tickets[i]);
 				}
 			}
-			return critical;
+			if (tickets.length > 0){
+				return critical;
+			} else {
+				return false;	
+			}
 		},
 		sortTickets: function(tickets){
 			if (! tickets){
