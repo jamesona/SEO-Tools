@@ -204,29 +204,29 @@ function Dashboard() {
         className: 'navbar navbar-inverse navbar-fixed-bottom',
         id: 'dashboard',
       }),
-      style: self.createElement(this.HTML.dashboard, 'link', {
+      style: self.createElement(this.dashboard, 'link', {
         rel: 'stylesheet',
         type: 'text/css',
         href: 'https://rawgit.com/jamesona/SEO-Tools/master/am-dashboard/dashboard.css',
       }),
-      nav: self.createElement(this.HTML.dashboard, 'ul', {
+      nav: self.createElement(this.dashboard, 'ul', {
         className: 'nav navbar-nav',
       }),
-      tools: self.createElement(this.HTML.nav, 'li', {
+      tools: self.createElement(this.nav, 'li', {
         innerHTML: '<a class="dropdown-toggle" data-toggle="dropdown">Tools</a>',
         className: 'dropup',
       }),
-      toolsMenu: self.createElement(this.HTML.tools, 'ul', {
+      toolsMenu: self.createElement(this.tools, 'ul', {
         className: 'dropdown-menu',
       }),
-      tickets: self.createElement(this.HTML.nav, 'li', {
+      tickets: self.createElement(this.nav, 'li', {
         innerHTML: '<a class="dropdown-toggle" data-toggle="dropdown">Tickets</a>',
         className: 'dropup',
       }),
-      ticketsMenu: self.createElement(this.HTML.tickets, 'ul', {
+      ticketsMenu: self.createElement(this.tickets, 'ul', {
         className: 'dropdown-menu',
       }),
-      ticketCalendar: self.createElement(this.HTML.ticketsMenu, 'li', {
+      ticketCalendar: self.createElement(this.ticketsMenu, 'li', {
         innerHTML: '<a>Calendar</a>',
         onclick: function(){
           var node = bootbox.alert('none')[0].children[0].children[0].children[0],
@@ -235,7 +235,7 @@ function Dashboard() {
           calendar.draw(node);
         }
       }),
-      critical: self.createElement(this.HTML.nav, 'li', {
+      critical: self.createElement(this.nav, 'li', {
         innerHTML: self.Tickets.countCritical(),
         id: 'critical',
         onclick: self.Tickets.countCritical(),
