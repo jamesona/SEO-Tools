@@ -9,6 +9,11 @@
 
 function Dashboard() {
 	var self = this;
+	this.tryCache = function(){
+		if (self.Tickets.ticketArray) {
+			localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
+		}
+	};
 	this.createElement = function(parent, tag, attributes) {
 		var element = parent.appendChild(document.createElement(tag));
 		for (var attribute in attributes) {
@@ -238,10 +243,11 @@ function Dashboard() {
 			return list;
 		},
 	}
-	window.addEventListener("beforeunload", function(){
-		if (self.Tickets.ticketArray) {
-			localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
-		}
-	});
+	window.beforeunload = function(){
+		this.tryCache();
+	};
+	window.onhashchange = function(){
+		this.tryCache();	
+	};
 	if (localStorage.ticketCache) self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
 }
