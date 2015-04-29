@@ -1,17 +1,23 @@
 /* call using this enclosure
-  (function(){  
+  (function(){
     var url = 'https://rawgit.com/jamesona/SEO-Tools/master/am-dashboard/dashboard.js';
     document.head.appendChild(document.createElement('script')).src=url;
-    function initialize(){if (typeof(Dashboard) !== 'undefined') {var db = new Dashboard()}
-    else {setTimeout(function(){initialize()}, 100);}}
+    function initialize(){
+      if (typeof(Dashboard) !== 'undefined' && typeof(ko) !== 'undefined' && ko.dataFor(app) !== undefined) {
+          //console.log('Knockout:');console.log(ko);console.log('App:');console.log(ko.dataFor(app));
+          db = new Dashboard(ko.dataFor(app))
+      } else {
+          setTimeout(function(){initialize()}, 100);
+      }
+    }
     initialize();
   })();
 */
 
-function Dashboard() {
+function Dashboard(app) {
   var self = this;
   this.openClient = function(client) {
-    ko.dataFor(app).showManageCustomer(client);
+    app.showManageCustomer(client);
   };
   this.closeClient = function() {
     var buttons = document.getElementsByClassName('close'),
@@ -127,8 +133,8 @@ function Dashboard() {
     },
     getTickets: function() {
       //get tickets
-      if (typeof(ko.dataFor(app).contentViewModel().myTickets) === "function"){
-        self.Tickets.ticketArray = ko.dataFor(app).contentViewModel().myTickets();
+      if (typeof(app.contentViewModel().myTickets) === "function"){
+        self.Tickets.ticketArray = app.contentViewModel().myTickets();
       } else if (localStorage.ticketCache) {
         self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
       }
