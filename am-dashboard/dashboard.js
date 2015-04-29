@@ -183,7 +183,7 @@ function Dashboard() {
       }
       return list;
     },
-    tryCache = function(){
+    tryCache: function(){
       if (self.Tickets.ticketArray) {
         localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
       }
@@ -191,7 +191,7 @@ function Dashboard() {
   };
   
   this.HTML = {
-      createElement = function(parent, tag, attributes) {
+      createElement: function(parent, tag, attributes) {
         console.log(tag+' added to '+parent);
         var element = parent.appendChild(document.createElement(tag));
         for (var attribute in attributes) {
@@ -200,7 +200,7 @@ function Dashboard() {
           }
         }
         return element;
-      }
+      },
       dashboard: self.createElement(document.body, 'div', {
         className: 'navbar navbar-inverse navbar-fixed-bottom',
         id: 'dashboard',
