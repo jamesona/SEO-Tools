@@ -9,6 +9,10 @@
 
 function Dashboard() {
 	var self = this;
+	window.addEventListener("beforeunload", function(){
+		localStorage.ticketCache = JSON.stringify(this.Tickets.ticketArray);
+	});
+	if (localStorage.ticketCache) this.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
 	this.createElement = function(parent, tag, attributes) {
 		var element = parent.appendChild(document.createElement(tag));
 		for (var attribute in attributes) {
@@ -174,7 +178,9 @@ function Dashboard() {
 
 	this.Tickets = {
 		getTickets: function() {
-			self.Tickets.ticketArray = ko.dataFor(app.myTicketsViewModel()).contentViewModel().myTickets();
+			if (typeof(ko.dataFor(app).contentViewModel().myTickets) !== 'undefined'){
+				self.Tickets.ticketArray = ko.dataFor(app).contentViewModel().myTickets();	
+			}
 			return self.Tickets.ticketArray;
 		},
 		getCritical: function() {
