@@ -201,7 +201,7 @@ function Dashboard() {
 				data[day].push(ticket);
 			}
 			return data;
-		}
+		},
 		listTickets: function(tickets){
 			var list = document.createElement('ul');
 			for (var i=0;i<tickets.length;i++){
@@ -214,6 +214,6 @@ function Dashboard() {
 				listItem.innerHTML = text.
 				list.appendChild(listItem);
 			}
-		}
+		},
 	}
 }
