@@ -173,8 +173,7 @@ function Dashboard() {
 			else {return self.Tickets.countCritical();}
 		})(),
 		id: 'critical',
-		onclick: self.Tickets.countCritical();
-		},
+		onclick: self.Tickets.countCritical(),
 	});
 
 
