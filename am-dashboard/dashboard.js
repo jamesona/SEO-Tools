@@ -1,12 +1,3 @@
-/* call using the following enclosure:
-(function(){
-  var url = 'https://rawgit.com/jamesona/SEO-Tools/master/am-dashboard/dashboard.js';
-  document.head.appendChild(document.createElement('script')).src=url;
-  function initialize(){if (typeof(Dashboard) !== 'undefined') {var db = new Dashboard()} else {setTimeout(function(){initialize()}, 100);}}
-  initialize();
-})();
-*/
-
 function Dashboard() {
 	var self = this;
 	this.tryCache = function(){
@@ -56,7 +47,7 @@ function Dashboard() {
 	  		inLastRow = 6 - endingDate.getDay();
 	   
 	  		// generate header
-	  	  	this.table = document.createElement('table');
+	  	  this.table = document.createElement('table');
 	  		this.head = document.createElement('thead');
 	  		this.prev = document.createElement('th');
 	  		this.next = document.createElement('th');
