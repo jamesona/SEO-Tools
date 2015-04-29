@@ -18,6 +18,15 @@ function Dashboard() {
     i = buttons.length - 1;
     if (i >= 1) buttons[i - 1].click();
   };
+  this.createElement = function(parent, tag, attributes) {
+        var element = parent.appendChild(document.createElement(tag));
+        for (var attribute in attributes) {
+          if (attributes.hasOwnProperty(attribute)) {
+            element[attribute] = attributes[attribute];
+          }
+        }
+        return element;
+  };
   this.Tickets = {
     calendar: function(month, year, data) {
       if (typeof(month) == Object) {data = month, month = null;}
@@ -188,58 +197,48 @@ function Dashboard() {
       }
     },
   };
-  this.HTML = {
-      createElement: function(parent, tag, attributes) {
-        console.log(tag+' added to '+parent);
-        var element = parent.appendChild(document.createElement(tag));
-        for (var attribute in attributes) {
-          if (attributes.hasOwnProperty(attribute)) {
-            element[attribute] = attributes[attribute];
-          }
-        }
-        return element;
-      },
-      dashboard: this.createElement(document.body, 'div', {
+  this.HTML = {};
+  this.HTML.dashboard = this.createElement(document.body, 'div', {
         className: 'navbar navbar-inverse navbar-fixed-bottom',
         id: 'dashboard',
-      }),
-      style: this.createElement(this.dashboard, 'link', {
-        rel: 'stylesheet',
-        type: 'text/css',
-        href: 'https://rawgit.com/jamesona/SEO-Tools/master/am-dashboard/dashboard.css',
-      }),
-      nav: this.createElement(this.dashboard, 'ul', {
-        className: 'nav navbar-nav',
-      }),
-      tools: this.createElement(this.nav, 'li', {
-        innerHTML: '<a class="dropdown-toggle" data-toggle="dropdown">Tools</a>',
-        className: 'dropup',
-      }),
-      toolsMenu: this.createElement(this.tools, 'ul', {
-        className: 'dropdown-menu',
-      }),
-      tickets: this.createElement(this.nav, 'li', {
-        innerHTML: '<a class="dropdown-toggle" data-toggle="dropdown">Tickets</a>',
-        className: 'dropup',
-      }),
-      ticketsMenu: this.createElement(this.tickets, 'ul', {
-        className: 'dropdown-menu',
-      }),
-      ticketCalendar: this.createElement(this.ticketsMenu, 'li', {
-        innerHTML: '<a>Calendar</a>',
-        onclick: function(){
-          var node = bootbox.alert('none')[0].children[0].children[0].children[0],
-          data = self.Tickets.sortTickets(),
-          calendar = new self.Tickets.calendar(data);
-          calendar.draw(node);
-        }
-      }),
-      critical: this.createElement(this.nav, 'li', {
-        innerHTML: self.Tickets.countCritical(),
-        id: 'critical',
-        onclick: self.Tickets.countCritical(),
-      }),
-  };
+  });
+  this.HTML.style = this.createElement(this.HTML.dashboard, 'link', {
+    rel: 'stylesheet',
+    type: 'text/css',
+    href: 'https://rawgit.com/jamesona/SEO-Tools/master/am-dashboard/dashboard.css',
+  }),
+  this.HTML.nav = this.createElement(this.HTML.dashboard, 'ul', {
+    className: 'nav navbar-nav',
+  }),
+  this.HTML.tools = this.createElement(this.HTML.nav, 'li', {
+    innerHTML: '<a class="dropdown-toggle" data-toggle="dropdown">Tools</a>',
+    className: 'dropup',
+  }),
+  this.HTML.toolsMenu = this.createElement(this.HTML.tools, 'ul', {
+    className: 'dropdown-menu',
+  }),
+  this.HTML.tickets = this.createElement(this.HTML.nav, 'li', {
+    innerHTML: '<a class="dropdown-toggle" data-toggle="dropdown">Tickets</a>',
+    className: 'dropup',
+  }),
+  this.HTML.ticketsMenu = this.createElement(this.HTML.tickets, 'ul', {
+    className: 'dropdown-menu',
+  }),
+  this.HTML.ticketCalendar = this.createElement(this.HTML.ticketsMenu, 'li', {
+    innerHTML: '<a>Calendar</a>',
+    onclick: function(){
+      var node = bootbox.alert('none')[0].children[0].children[0].children[0],
+      data = self.Tickets.sortTickets(),
+      calendar = new self.Tickets.calendar(data);
+      calendar.draw(node);
+    }
+  }),
+  this.HTML.critical = this.createElement(this.HTML.nav, 'li', {
+    innerHTML: self.Tickets.countCritical(),
+    id: 'critical',
+    onclick: self.Tickets.countCritical(),
+  });
+  
   window.beforeunload = function(){
     this.Tickets.tryCache();
   };
