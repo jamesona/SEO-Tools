@@ -13,8 +13,6 @@ function Dashboard() {
 		if (self.Tickets.ticketArray) {
 			localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
 		}
-		//DEBUG
-		alert('Caching tickets');
 	});
 	if (localStorage.ticketCache) this.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
 	this.createElement = function(parent, tag, attributes) {
