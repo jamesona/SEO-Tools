@@ -14,7 +14,7 @@ function Dashboard() {
 			localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
 		}
 	});
-	if (localStorage.ticketCache) this.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
+	if (localStorage.ticketCache) self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
 	this.createElement = function(parent, tag, attributes) {
 		var element = parent.appendChild(document.createElement(tag));
 		for (var attribute in attributes) {
