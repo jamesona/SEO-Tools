@@ -23,7 +23,7 @@ function Dashboard() {
 
 	this.closeClient = function() {
 		var buttons = document.getElementsByClassName('close'),
-			i = buttons.length - 1;
+		i = buttons.length - 1;
 		if (i >= 1) buttons[i - 1].click();
 	};
 
@@ -78,7 +78,7 @@ function Dashboard() {
 				//if data argument present, append key value for current day
 				if (data) {
 					var today = (this.month + 1) + '/' + day + '/' + this.year;
-					if (data[today]) html += '<p>' + Object.keys(data[today]).length + ' Clients</p>';
+					if (data[today]) html += '<p>' + Object.keys(data[today]).length + ' Tickets</p>';
 				}
 				html += '</td>';
 				if ((day + startingDay) % 7 === 0 && day != monthLength) html += '</tr><tr>';
@@ -86,7 +86,11 @@ function Dashboard() {
 			if (inLastRow) html += '<td colspan="' + inLastRow + '"></td>';
 			html += '</tr>';
 			this.table.innerHTML += html;
-			ele.innerHTML = this.table.outerHTML;
+            		if (ele){
+            			ele.innerHTML = this.table.outerHTML;
+            		} else {
+              			return this.table.outerHTML;
+            		}
 			// save reference to dom node in object
 			this.node = ele;
 			// save reference to calendar object for enclosure scope
@@ -173,10 +177,10 @@ function Dashboard() {
 			return critical;
 		},
 		sortTickets: function(){
-			var data = [];
-			if (! self.Tickets.ticketArray) this.getTickets();
-			for (var i=0;i<db.Tickets.ticketArray.length;i++){
-				var ticket = self.Tickets.ticketArray[i],
+			var data = {};
+			if (! this.ticketArray) this.getTickets();
+			for (var i=0;i<this.ticketArray.length;i++){
+				var ticket = this.ticketArray[i],
 				date = new Date(ticket.ScheduledEndDate),
 				day = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
 				if (! data[day]){ data[day] = []};
