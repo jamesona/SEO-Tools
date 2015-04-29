@@ -180,6 +180,8 @@ function Dashboard() {
 		getTickets: function() {
 			if (typeof(ko.dataFor(app).contentViewModel().myTickets) !== 'undefined'){
 				self.Tickets.ticketArray = ko.dataFor(app).contentViewModel().myTickets();	
+			} else if if (localStorage.ticketCache) {
+				self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);	
 			}
 			return self.Tickets.ticketArray;
 		},
