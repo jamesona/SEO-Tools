@@ -170,17 +170,10 @@ function Dashboard() {
 	this.HTML.critical = this.createElement(this.HTML.nav, 'li', {
 		innerHTML: (function(){
 			if (test) {return '<a>Click to get Critical</a>';} 
-			else {this.click();}})();
+			else {return self.Tickets.countCritical();}
+		})(),
 		id: 'critical',
-		onclick: function() {
-			var criticals = self.Tickets.getCritical();
-			if (criticals) {
-				this.innerHTML = '<a>Critical Tickets: <span style="color: #ff8888;\
-        			font-weight: bolder;">' + criticals.length + '</span></a>';
-			} else {
-				this.innerHTML = '<a>Error loading tickets!</a>';
-			}
-				
+		onclick: self.Tickets.countCritical();
 		},
 	});
 
@@ -214,6 +207,15 @@ function Dashboard() {
 				return critical;
 			} else {
 				return false;	
+			}
+		},
+		countCritical: function() {
+			var criticals = self.Tickets.getCritical();
+			if (criticals) {
+				return '<a>Critical Tickets: <span style="color: #ff8888;\
+        			font-weight: bolder;">' + criticals.length + '</span></a>';
+			} else {
+				return = '<a>Error loading tickets!</a>';
 			}
 		},
 		sortTickets: function(tickets){
