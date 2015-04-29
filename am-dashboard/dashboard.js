@@ -187,11 +187,14 @@ function Dashboard() {
 			}
 			return critical;
 		},
-		sortTickets: function(){
+		sortTickets: function(tickets){
+			if (! tickets){
+				if (! this.ticketArray) this.getTickets();
+				var tickets = this.ticketArray;
+			}
 			var data = {};
-			if (! this.ticketArray) this.getTickets();
-			for (var i=0;i<this.ticketArray.length;i++){
-				var ticket = this.ticketArray[i],
+			for (var i=0;i<tickets.length;i++){
+				var ticket = this.tickets[i],
 				date = new Date(ticket.ScheduledEndDate),
 				day = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
 				if (! data[day]){ data[day] = []};
