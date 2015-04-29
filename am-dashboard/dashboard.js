@@ -86,11 +86,11 @@ function Dashboard() {
 			if (inLastRow) html += '<td colspan="' + inLastRow + '"></td>';
 			html += '</tr>';
 			this.table.innerHTML += html;
-            		if (ele){
-            			ele.innerHTML = this.table.outerHTML;
-            		} else {
-              			return this.table.outerHTML;
-            		}
+		};
+		this.getContent = function(){
+              		return this.table.outerHTML;
+		};
+		this.registerTriggers = function(){
 			// save reference to dom node in object
 			this.node = ele;
 			// save reference to calendar object for enclosure scope
@@ -119,7 +119,7 @@ function Dashboard() {
 					}
 				};
 			})();
-		};
+		}
 	};
 	this.HTML = {};
 	this.HTML.dashboard = this.createElement(document.body, 'div', {
