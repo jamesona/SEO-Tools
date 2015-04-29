@@ -34,7 +34,7 @@ function Dashboard() {
 		this.month_labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 		this.month = (isNaN(month) || month === null) ? this.current_date.getMonth() : month;
 		this.year = (isNaN(year) || year === null) ? this.current_date.getFullYear() : year;
-		this.draw = function(ele) {
+		this.draw = function(callback) {
 			if (this.month > 11) {
 				this.month -= 12;
 				this.year += 1;
@@ -87,11 +87,12 @@ function Dashboard() {
 			if (inLastRow) html += '<td colspan="' + inLastRow + '"></td>';
 			html += '</tr>';
 			this.table.innerHTML += html;
+			if (typeof(callback) == function) callback();
 		};
 		this.getContent = function(){
               		return this.table.outerHTML;
 		};
-		this.registerTriggers = function(){
+		this.registerTriggers = function(ele){
 			// save reference to dom node in object
 			this.node = ele;
 			// save reference to calendar object for enclosure scope
