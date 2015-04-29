@@ -2,6 +2,8 @@
 (function(){
   var url = 'https://rawgit.com/jamesona/SEO-Tools/master/am-dashboard/dashboard.js';
   document.head.appendChild(document.createElement('script')).src=url;
+  function initialize(){if (typeof(Dashboard) !== 'undefined') {var db = new Dashboard()} else {setTimeout(function(){initialize()}, 100);}}
+  initialize();
 })();
 */
 
