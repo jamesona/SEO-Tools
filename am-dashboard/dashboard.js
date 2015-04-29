@@ -211,10 +211,9 @@ function Dashboard() {
 		countCritical: function() {
 			var criticals = self.Tickets.getCritical();
 			if (criticals) {
-				return '<a>Critical Tickets: <span style="color: #ff8888;\
-        			font-weight: bolder;">' + criticals.length + '</span></a>';
+				return '<a>Critical Tickets: <span style="color: #ff8888;font-weight: bolder;">' + criticals.length + '</span></a>';
 			} else {
-				return = '<a>Error loading tickets!</a>';
+				return '<a>Error loading tickets!</a>';
 			}
 		},
 		sortTickets: function(tickets){
