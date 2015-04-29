@@ -26,14 +26,14 @@ function Dashboard(app) {
       i = buttons.length - 1;
       if (i >= 1) buttons[i - 1].click();
     },
-    createElement = function(parent, tag, attributes) {
-          var element = parent.appendChild(document.createElement(tag));
-          for (var attribute in attributes) {
-            if (attributes.hasOwnProperty(attribute)) {
-              element[attribute] = attributes[attribute];
-            }
-          }
-          return element;
+    createElement: function(parent, tag, attributes) {
+      var element = parent.appendChild(document.createElement(tag));
+      for (var attribute in attributes) {
+        if (attributes.hasOwnProperty(attribute)) {
+          element[attribute] = attributes[attribute];
+        }
+      }
+      return element;
     },
   };
   this.Tickets = {
