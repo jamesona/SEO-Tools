@@ -10,7 +10,9 @@
 function Dashboard() {
 	var self = this;
 	window.addEventListener("beforeunload", function(){
-		localStorage.ticketCache = JSON.stringify(this.Tickets.ticketArray);
+		if (this.Tickets.ticketArray) {
+			localStorage.ticketCache = JSON.stringify(this.Tickets.ticketArray);
+		}
 	});
 	if (localStorage.ticketCache) this.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
 	this.createElement = function(parent, tag, attributes) {
