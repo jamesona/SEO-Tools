@@ -157,10 +157,7 @@ function Dashboard() {
 		}
 	});
 	this.HTML.critical = this.createElement(this.HTML.nav, 'li', {
-		innerHTML: (function(){
-			if (test) {return '<a>Click to get Critical</a>';} 
-			else {return self.Tickets.countCritical();}
-		})(),
+		innerHTML: (function(){self.Tickets.countCritical();})(),
 		id: 'critical',
 		onclick: self.Tickets.countCritical(),
 	});
