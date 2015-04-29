@@ -174,7 +174,7 @@ function Dashboard() {
 
 	this.Tickets = {
 		getTickets: function() {
-			self.Tickets.ticketArray = ko.dataFor(app).contentViewModel().myTickets();
+			self.Tickets.ticketArray = ko.dataFor(app.myTicketsViewModel()).contentViewModel().myTickets();
 			return self.Tickets.ticketArray;
 		},
 		getCritical: function() {
