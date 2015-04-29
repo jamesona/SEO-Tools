@@ -155,9 +155,9 @@ function Dashboard() {
 		innerHTML: '<a>Calendar</a>',
 		onclick: function(){
 			var node = bootbox.alert('none')[0].children[0].children[0].children[0],
-			calendar = new self.calendar();
+			data = self.Tickets.sortTickets(),
+			calendar = new self.calendar(data);
 			calendar.draw(node);
-			calendar.registerTriggers(node);
 		}
 	});
 	this.HTML.critical = this.createElement(this.HTML.nav, 'li', {
