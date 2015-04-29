@@ -178,7 +178,7 @@ function Dashboard() {
 
 	this.Tickets = {
 		getTickets: function() {
-			if (typeof(ko.dataFor(app).contentViewModel().myTickets) !== 'undefined'){
+			if (typeof(ko.dataFor(app).contentViewModel().myTickets) === "function"){
 				self.Tickets.ticketArray = ko.dataFor(app).contentViewModel().myTickets();	
 			} else if (localStorage.ticketCache) {
 				self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);	
