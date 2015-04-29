@@ -14,17 +14,14 @@ function Dashboard() {
 		}
 		return element;
 	};
-
 	this.openClient = function(client) {
 		ko.dataFor(app).showManageCustomer(client);
 	};
-
 	this.closeClient = function() {
 		var buttons = document.getElementsByClassName('close'),
 		i = buttons.length - 1;
 		if (i >= 1) buttons[i - 1].click();
 	};
-	
 	this.calendar = function(month, year, data) {
 		if (typeof(month) == Object) data = month, month = null;
 		this.current_date = new Date();
@@ -122,6 +119,7 @@ function Dashboard() {
 	      		})();
 	  	};
 	};
+	
 	this.HTML = {};
 	this.HTML.dashboard = this.createElement(document.body, 'div', {
 		className: 'navbar navbar-inverse navbar-fixed-bottom',
@@ -166,7 +164,6 @@ function Dashboard() {
 		id: 'critical',
 		onclick: self.Tickets.countCritical(),
 	});
-
 
 	this.Tickets = {
 		getTickets: function() {
