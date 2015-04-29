@@ -202,5 +202,18 @@ function Dashboard() {
 			}
 			return data;
 		}
+		listTickets: function(tickets){
+			var list = document.createElement('ul');
+			for (var i=0;i<tickets.length;i++){
+				var ticket = tickets[i],
+				listItem = document.createElement('li'),
+				text = ticket.CompanyName+': '+ticket.TicketTypeName
+				text += ' (Due: '+(ticket.ScheduledEndDate.getMonth()+1)+
+				text += '/'+ticket.ScheduledEndDate.getDate()+'/'
+				text += ticket.ScheduledEndDate.getFullYear()+')'
+				listItem.innerHTML = text.
+				list.appendChild(listItem);
+			}
+		}
 	}
 }
