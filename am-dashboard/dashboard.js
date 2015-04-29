@@ -16,22 +16,25 @@
 
 function Dashboard(app) {
   var self = this;
-  this.openClient = function(client) {
-    app.showManageCustomer(client);
-  };
-  this.closeClient = function() {
-    var buttons = document.getElementsByClassName('close'),
-    i = buttons.length - 1;
-    if (i >= 1) buttons[i - 1].click();
-  };
-  this.createElement = function(parent, tag, attributes) {
-        var element = parent.appendChild(document.createElement(tag));
-        for (var attribute in attributes) {
-          if (attributes.hasOwnProperty(attribute)) {
-            element[attribute] = attributes[attribute];
+  this.Tools = {
+    bobCal: function(){},
+    openClient: function(client) {
+      app.showManageCustomer(client);
+    },
+    closeClient: function() {
+      var buttons = document.getElementsByClassName('close'),
+      i = buttons.length - 1;
+      if (i >= 1) buttons[i - 1].click();
+    },
+    createElement = function(parent, tag, attributes) {
+          var element = parent.appendChild(document.createElement(tag));
+          for (var attribute in attributes) {
+            if (attributes.hasOwnProperty(attribute)) {
+              element[attribute] = attributes[attribute];
+            }
           }
-        }
-        return element;
+          return element;
+    },
   };
   this.Tickets = {
     calendar: function(month, year, data) {
@@ -133,10 +136,15 @@ function Dashboard(app) {
     },
     getTickets: function() {
       //get tickets
+      console.log(app);
+      try {
       if (typeof(app.contentViewModel().myTickets) === "function"){
         self.Tickets.ticketArray = app.contentViewModel().myTickets();
       } else if (localStorage.ticketCache) {
         self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
+      }
+      } catch(err) {
+        console.log(err.message);
       }
       //return results
       if (self.Tickets.ticketArray) {
@@ -204,33 +212,33 @@ function Dashboard(app) {
     },
   };
   this.HTML = {};
-  this.HTML.dashboard = this.createElement(document.body, 'div', {
+  this.HTML.dashboard = this.Tools.createElement(document.body, 'div', {
         className: 'navbar navbar-inverse navbar-fixed-bottom',
         id: 'dashboard',
   });
-  this.HTML.style = this.createElement(this.HTML.dashboard, 'link', {
+  this.HTML.style = this.Tools.createElement(this.HTML.dashboard, 'link', {
     rel: 'stylesheet',
     type: 'text/css',
     href: 'https://rawgit.com/jamesona/SEO-Tools/master/am-dashboard/dashboard.css',
   }),
-  this.HTML.nav = this.createElement(this.HTML.dashboard, 'ul', {
+  this.HTML.nav = this.Tools.createElement(this.HTML.dashboard, 'ul', {
     className: 'nav navbar-nav',
   }),
-  this.HTML.tools = this.createElement(this.HTML.nav, 'li', {
+  this.HTML.tools = this.Tools.createElement(this.HTML.nav, 'li', {
     innerHTML: '<a class="dropdown-toggle" data-toggle="dropdown">Tools</a>',
     className: 'dropup',
   }),
-  this.HTML.toolsMenu = this.createElement(this.HTML.tools, 'ul', {
+  this.HTML.toolsMenu = this.Tools.createElement(this.HTML.tools, 'ul', {
     className: 'dropdown-menu',
   }),
-  this.HTML.tickets = this.createElement(this.HTML.nav, 'li', {
+  this.HTML.tickets = this.Tools.createElement(this.HTML.nav, 'li', {
     innerHTML: '<a class="dropdown-toggle" data-toggle="dropdown">Tickets</a>',
     className: 'dropup',
   }),
-  this.HTML.ticketsMenu = this.createElement(this.HTML.tickets, 'ul', {
+  this.HTML.ticketsMenu = this.Tools.createElement(this.HTML.tickets, 'ul', {
     className: 'dropdown-menu',
   }),
-  this.HTML.ticketCalendar = this.createElement(this.HTML.ticketsMenu, 'li', {
+  this.HTML.ticketCalendar = this.Tools.createElement(this.HTML.ticketsMenu, 'li', {
     innerHTML: '<a>Calendar</a>',
     onclick: function(){
       var node = bootbox.alert('none')[0].children[0].children[0].children[0],
@@ -239,7 +247,7 @@ function Dashboard(app) {
       calendar.draw(node);
     }
   }),
-  this.HTML.critical = this.createElement(this.HTML.nav, 'li', {
+  this.HTML.critical = this.Tools.createElement(this.HTML.nav, 'li', {
     innerHTML: self.Tickets.countCritical(),
     id: 'critical',
     onclick: self.Tickets.countCritical(),
