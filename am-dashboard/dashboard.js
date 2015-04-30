@@ -284,15 +284,15 @@ function Dashboard(application, ko, bootbox) {
       return data;
     },
     listTickets: function(tickets){
-      var list = document.createElement('ul');
+      var list = document.createElement('table');
       for (var i=0;i<tickets.length;i++){
         var ticket = tickets[i],
-        listItem = document.createElement('li'),
-        text = ticket.CompanyName+': '+ticket.TicketTypeName;
-        text += ' (Due: '+(ticket.ScheduledEndDate.getMonth()+1);
-        text += '/'+ticket.ScheduledEndDate.getDate()+'/';
-        text += ticket.ScheduledEndDate.getFullYear()+')';
-        listItem.innerHTML = text;
+        listItem = document.createElement('tr'),
+        content = '<td>'+ticket.CompanyName+'</td><td>'+ticket.TicketTypeName+'</td>';
+        content += '<td>Due: '+(ticket.ScheduledEndDate.getMonth()+1);
+        content += '/'+ticket.ScheduledEndDate.getDate()+'/';
+        content += ticket.ScheduledEndDate.getFullYear()+'</td>';
+        listItem.innerHTML = content;
         listItem.onclick = function(){
           self.Tools.openClient(ticket.CustomerId);
           var modals = document.getElementsByClassName('bootbox-close-button');
