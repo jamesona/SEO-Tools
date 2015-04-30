@@ -16,12 +16,11 @@
 
 function Dashboard(app) {
   var self = this;
-  console.log(app);
-  app.contentViewModel = app.contentViewModel();
+  this.app = app;
   this.Tools = {
     bobCal: function(){},
     openClient: function(client) {
-      app.showManageCustomer(client);
+      self.app.showManageCustomer(client);
     },
     closeClient: function() {
       var buttons = document.getElementsByClassName('close'),
@@ -170,8 +169,8 @@ function Dashboard(app) {
     getTickets: function() {
       //get tickets
       try {
-        if (typeof(app.contentViewModel().myTickets) === "function"){
-          self.Tickets.ticketArray = app.contentViewModel().myTickets();
+        if (typeof(self.app.contentViewModel().myTickets) === "function"){
+          self.Tickets.ticketArray = self.app.contentViewModel().myTickets();
         } else if (localStorage.ticketCache) {
           self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
         }
