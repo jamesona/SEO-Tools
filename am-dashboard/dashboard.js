@@ -56,7 +56,7 @@ function Dashboard(app) {
       } else if (ko.dataFor(self.app) !== undefined){
         var view = ko.dataFor(self.app).contentViewModel();
       } 
-      if (! test.hasOwnProperty('customersDataTable')){
+      if (! view.hasOwnProperty('customersDataTable')){
         bootbox.alert('No client in active view.\nTry running this tool while viewing a client.');
         return 1;
       } else {
