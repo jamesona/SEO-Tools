@@ -185,7 +185,7 @@ function Dashboard(application, ko, bootbox) {
             var today = (this.month+1)+'/'+day+'/'+this.year;
             if (data[today]) {
               html += '<p>'+Object.keys(data[today]).length+' '+data.type+'</p>';
-              html += '<p><button class="btn btn-primary">View '+data.type+'</button></p>'
+              html += '<p><button class="btn btn-primary" onclick="db.Tickets.showTickets(db.Tickets.sortTickets()[\''+today+'\']);">'+data.type+'</button></p>';
             }
           }
           html += '</td>';
@@ -295,10 +295,20 @@ function Dashboard(application, ko, bootbox) {
         listItem.innerHTML = text;
         listItem.onclick = function(){
           self.Tools.openClient(ticket.CustomerId);
+          var modals = document.getElementsByClassName('bootbox-close-button');
+          for (var i=0;i<modals.length;i++){modals[i].click();}
         };
         list.appendChild(listItem);
       }
       return list;
+    },
+    showTickets: function(tickets){
+      bootbox.dialog({
+        message: self.Tickets.listTickets(tickets),
+        title: "Tickets",
+        className: "ticket-list",
+        buttons: {},
+      });
     },
     tryCache: function(){
       try {
