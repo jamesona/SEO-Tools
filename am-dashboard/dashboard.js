@@ -61,6 +61,8 @@ function Dashboard(app) {
         bootbox.alert('No client in active view.\nTry running this tool while viewing a client.');
         return 1;
       } else {
+        console.log(view);
+        if (typeof(view.customersDataTable) === undefined) {console.log('No customersDataTable');return;}
         var data = view.customersDataTable.dataSource(),
         taskDate = function(day){
           var days = [new Date(),new Date(),new Date()];
