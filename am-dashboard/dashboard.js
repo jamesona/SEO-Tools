@@ -78,6 +78,7 @@ function Dashboard(app) {
           }
           return 'date '+days[day].toDateString().substring(4);
         },
+        textarea = document.createElement('textarea'),
         text = data.CustomerId+' - '+data.Name;
         text += '[[NOTE]]: https://launchpad.boostability.com/#customerservice/customersearch/'+data.CustomerId;
         text += '\n...'+data.CustomerId+' Welcome Call [['+taskDate(2)+']]';
@@ -89,7 +90,8 @@ function Dashboard(app) {
         text += '\n......'+data.CustomerId+' 3rd Welcome Email [['+taskDate(2)+']]';
         text += '\n...'+data.CustomerId+' Keyword Research';
         text += '\n...'+data.CustomerId+' Local Profile';
-        bootbox.alert(text);
+        textarea.value = text;
+        bootbox.alert(textarea);
       }
     },
     openClient: function(client) {
