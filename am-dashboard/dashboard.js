@@ -169,11 +169,13 @@ function Dashboard(app) {
     },
     getTickets: function() {
       //get tickets
-      console.log(self.app);
-      console.log(self.app.contentViewModel());/*
-      if (typeof(self.app.contentViewModel().myTickets) === "function"){
-        self.Tickets.ticketArray = self.app.contentViewModel().myTickets();
-      } else if (localStorage.ticketCache) {
+      if (self.app.contentViewModel() !== undefined){
+        if (typeof(self.app.contentViewModel().myTickets) === "function"){
+          self.Tickets.ticketArray = self.app.contentViewModel().myTickets();
+        } else if (localStorage.ticketCache) {
+          self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
+        }
+      } else {
         self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
       }
       //return results
@@ -183,7 +185,7 @@ function Dashboard(app) {
       } else {
         alert('Unable to access tickets at this time!');
         return [];
-      }*/
+      }
     },
     getCritical: function() {
       var tickets = this.getTickets(),
