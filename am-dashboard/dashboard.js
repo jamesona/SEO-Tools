@@ -137,13 +137,6 @@ function Dashboard(application, ko, bootbox) {
       this.month = (isNaN(month) || month === null) ? this.current_date.getMonth() : month;
       this.year = (isNaN(year) || year === null) ? this.current_date.getFullYear() : year;
       this.draw = function(ele){
-          if (this.month > 11) {
-            this.month -= 12;
-            this.year += 1;
-          } else if (month < 0) {
-            this.month += 12;
-            this.year -= 1;
-          }
           // get dates
           var startingDay = new Date(this.year, this.month, 1).getDay(),
           endingDate = new Date(this.year, this.month + 1, 0),
@@ -206,27 +199,41 @@ function Dashboard(application, ko, bootbox) {
               (function(){
             // save calendar object reference for listeners
             var self = this;
-                self.prev.addEventListener('click', function(){
+            self.prev.addEventListener('click', function(){
               cal.month--;
-                    cal.draw(cal.node);
-                });
-            self.next.addEventListener('click', function(){
-                    cal.month++;
               cal.draw(cal.node);
-                });
-                document.onkeydown = function(e) {
-                  e = e || window.event;
-                    if (e.keyCode == '37') {
-                    // left arrow
-                    cal.month--;
-                    cal.draw(cal.node);
-                    } else if (e.keyCode == '39') {
-                        // right arrow
-                        cal.month++;
-                    cal.draw(cal.node);
-                    }
-                };
-              })();
+            });
+            self.next.addEventListener('click', function(){
+              cal.month++;
+              cal.draw(cal.node);
+            });
+            document.onkeydown = function(e) {
+              e = e || window.event;
+                if (e.keyCode == '37') {
+                  // left arrow
+                  cal.month--;
+                  if (this.month > 11) {
+                    this.month -= 12;
+                    this.year += 1;
+                  } else if (month < 0) {
+                    this.month += 12;
+                    this.year -= 1;
+                  }
+                  cal.draw(cal.node);
+                } else if (e.keyCode == '39') {
+                  // right arrow
+                  if (this.month > 11) {
+                    this.month -= 12;
+                    this.year += 1;
+                  } else if (month < 0) {
+                    this.month += 12;
+                    this.year -= 1;
+                  }
+                  cal.month++;
+                  cal.draw(cal.node);
+                }
+            };
+          })();
         };
     },
     getTickets: function() {
