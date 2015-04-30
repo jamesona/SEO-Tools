@@ -278,7 +278,8 @@ function Dashboard(app) {
     innerHTML: '<a>Calendar</a>',
     onclick: function(){
       var node = bootbox.alert('none')[0].children[0].children[0].children[0],
-      data = self.Tickets.sortTickets(),
+      data = self.Tickets.sortTickets();
+      console.log(data);
       calendar = new self.Tickets.calendar(data);
       calendar.draw(node);
     }
