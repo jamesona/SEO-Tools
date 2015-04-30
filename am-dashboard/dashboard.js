@@ -28,12 +28,12 @@ function Dashboard(application, ko, bootbox) {
       // exit on null entry
       if ( raw === null ) return;
       for (var cells = raw.replace(/Basic[\r\n\s\ta-z]*Partner ID[\t\s]+/i, '').split(/\t/),
-        client = {}, cols = ['Account ID',	'Account Start Date',	'Account Bucket',	'Account Spend',
-        'Date of Next Ticket',	'Engaged Status',	'Timezone',	'Welcome Call',	'Keyword Research',
-        'Local Profile Tab',	'Obtain or Create Google Logins',	'Create and Verify Google Profile',
-        'Obtain Site Access',	'Implement Onsite Edits',	'Create Yahoo Account',	'Create and Verify Yahoo Profile',
-        'Create and Verify Bing Profile',	'Install Analytics',	'Company Name',	'Contact Name',	'Website URL',	
-        'Email Address',	'Phone Number',	'Partner ID',];
+        client = {}, cols = ['Account ID',  'Account Start Date',  'Account Bucket',  'Account Spend',
+        'Date of Next Ticket',  'Engaged Status',  'Timezone',  'Welcome Call',  'Keyword Research',
+        'Local Profile Tab',  'Obtain or Create Google Logins',  'Create and Verify Google Profile',
+        'Obtain Site Access',  'Implement Onsite Edits',  'Create Yahoo Account',  'Create and Verify Yahoo Profile',
+        'Create and Verify Bing Profile',  'Install Analytics',  'Company Name',  'Contact Name',  'Website URL',  
+        'Email Address',  'Phone Number',  'Partner ID',];
         cells.length>0;){
         var keys = Object.keys(client).length;
         if (keys<cols.length-1){
@@ -82,7 +82,7 @@ function Dashboard(application, ko, bootbox) {
         view = ko.dataFor(self.app).contentViewModel();
       } 
       if (! view.hasOwnProperty('customersDataTable')){
-      	modal.remove();
+        modal.remove();
         bootbox.alert('No client data available in active view.<br />Try running this tool after searching for a client.');
         return 1;
       } else {
@@ -129,7 +129,7 @@ function Dashboard(application, ko, bootbox) {
   this.Tickets = {
     calendar: function(month, year, data) {
       if ( typeof(month) === Object ) {
-				data = month;
+        data = month;
         month = null;
       }
       console.log(data);
@@ -138,6 +138,7 @@ function Dashboard(application, ko, bootbox) {
       this.month_labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       this.month = (isNaN(month) || month === null) ? this.current_date.getMonth() : month;
       this.year = (isNaN(year) || year === null) ? this.current_date.getFullYear() : year;
+      console.log((this.month+1)+'/'+day+'/'+this.year);
       this.draw = function(ele){
           if (this.month > 11) {
             this.month -= 12;
