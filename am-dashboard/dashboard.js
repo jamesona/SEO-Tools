@@ -333,10 +333,16 @@ function Dashboard(application, ko, bootbox) {
   this.HTML.bobCalendar = this.Tools.createElement(this.HTML.toolsMenu, 'li', {
     innerHTML: '<a>BoB Calendar</a>',
     onclick: function(){
-      var node = bootbox.alert('none')[0].children[0].children[0].children[0],
+      bootbox.dialog({
+        message: " ",
+        title: "",
+        className: "big-modal",
+        buttons: {},
+      });
+      var modals = document.getElementsByClassName('bootbox-body'), modal = modals[modals.length-1],
       data = self.Tools.bobParse(prompt('Paste BoB data')),
       calendar = new self.Tickets.calendar(data);
-      calendar.draw(node);
+      calendar.draw(modal);
     }
   }),
   this.HTML.tickets = this.Tools.createElement(this.HTML.nav, 'li', {
