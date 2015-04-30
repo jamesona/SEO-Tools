@@ -42,8 +42,7 @@
 }
 .big-modal > div, .big-modal > div > div {
   width: 70vw;
-  height: 80vh;
 }
 .big-modal .modal-body {
-  max-height: 100vh !important;
+  max-height: none !important;
 }
