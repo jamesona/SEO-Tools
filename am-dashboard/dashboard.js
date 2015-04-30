@@ -1,11 +1,10 @@
-/* call using this enclosure
+/* load and initialize using this closure (add var before "db" on line 6, to privatize scope)
   (function(){
     var url = 'https://rawgit.com/jamesona/SEO-Tools/master/am-dashboard/dashboard.js';
     document.head.appendChild(document.createElement('script')).src=url;
     function initialize(){
       if (typeof(Dashboard) !== 'undefined' && typeof(ko) !== 'undefined' && ko.dataFor(app) !== undefined) {
-          //console.log('Knockout:');console.log(ko);console.log('App:');console.log(ko.dataFor(app));
-          db = new Dashboard(ko.dataFor(app))
+          db = new Dashboard(ko.dataFor(app), ko, bootbox);
       } else {
           setTimeout(function(){initialize()}, 100);
       }
@@ -14,9 +13,9 @@
   })();
 */
 
-function Dashboard(app, ko, bootbox) {
+function Dashboard(application, ko, bootbox) {
   var self = this;
-  this.app = app;
+  this.app = application;
   console.log(this.app);
   this.Tools = {
     bobParse: function(raw){ 
