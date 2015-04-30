@@ -46,3 +46,17 @@
 .big-modal .modal-body {
   max-height: none !important;
 }
+.ticket-list > div, .ticket-list > div > div {
+  max-width: 50em;
+  width: 50vw;
+}
+.ticket-list table {
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+.ticket-list td {
+  border: 1px solid black;
+}
+.ticket-list tr:hover {
+  background-color: rgba(30,30,30,0.1);
+}
