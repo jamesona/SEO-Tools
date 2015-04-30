@@ -185,7 +185,7 @@ function Dashboard(application, ko, bootbox) {
             var today = (this.month+1)+'/'+day+'/'+this.year;
             if (data[today]) {
               html += '<p>'+Object.keys(data[today]).length+' '+data.type+'</p>';
-              html += '<p><button class="btn btn-primary" onclick="db.Tickets.showTickets(db.Tickets.sortTickets()[\''+today+'\']);">'+data.type+'</button></p>';
+              html += '<p><button class="btn btn-primary" onclick="db.Tickets.showTickets(db.Tickets.sortTickets()[\''+today+'\']);">Show Tickets</button></p>';
             }
           }
           html += '</td>';
