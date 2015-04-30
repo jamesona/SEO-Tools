@@ -128,7 +128,7 @@ function Dashboard(application, ko, bootbox) {
   };
   this.Tickets = {
     calendar: function(month, year, data) {
-      if ( typeof(month) === Object ) {
+      if ( typeof(month) === 'object' ) {
         data = month;
         month = null;
       }
@@ -277,7 +277,7 @@ function Dashboard(application, ko, bootbox) {
       for (var i=0;i<tickets.length;i++){
         var ticket = tickets[i],
         date = new Date(ticket.ScheduledEndDate),
-        day = date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear();
+        day = (date.getMonth()+1)+'/'+date.getDate()+'/'+date.getFullYear();
         if (! data[day]){ data[day] = [];}
         data[day].push(ticket);
       }
