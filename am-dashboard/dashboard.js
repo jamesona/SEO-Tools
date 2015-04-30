@@ -142,6 +142,13 @@ function Dashboard(application, ko, bootbox) {
           endingDate = new Date(this.year, this.month + 1, 0),
           monthLength = endingDate.getDate(),
           inLastRow = 6 - endingDate.getDay();
+          if (this.month > 11) {
+            this.month -= 12;
+            this.year += 1;
+          } else if (this.month < 0) {
+            this.month += 12;
+            this.year -= 1;
+          }
        
           // generate header
           this.table = document.createElement('table');
@@ -212,23 +219,9 @@ function Dashboard(application, ko, bootbox) {
                 if (e.keyCode == '37') {
                   // left arrow
                   cal.month--;
-                  if (this.month > 11) {
-                    this.month -= 12;
-                    this.year += 1;
-                  } else if (month < 0) {
-                    this.month += 12;
-                    this.year -= 1;
-                  }
                   cal.draw(cal.node);
                 } else if (e.keyCode == '39') {
                   // right arrow
-                  if (this.month > 11) {
-                    this.month -= 12;
-                    this.year += 1;
-                  } else if (month < 0) {
-                    this.month += 12;
-                    this.year -= 1;
-                  }
                   cal.month++;
                   cal.draw(cal.node);
                 }
