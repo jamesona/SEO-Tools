@@ -17,6 +17,7 @@
 function Dashboard(app) {
   var self = this;
   this.app = app;
+  console.log(this.app);
   this.Tools = {
     bobCal: function(){},
     openClient: function(client) {
@@ -168,14 +169,12 @@ function Dashboard(app) {
     },
     getTickets: function() {
       //get tickets
-      try {
-        if (typeof(self.app.contentViewModel().myTickets) === "function"){
-          self.Tickets.ticketArray = self.app.contentViewModel().myTickets();
-        } else if (localStorage.ticketCache) {
-          self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
-        }
-      } catch(err) {
-        console.log(err.message);
+      console.log(self.app);
+      console.log(self.app.contentViewModel());/*
+      if (typeof(self.app.contentViewModel().myTickets) === "function"){
+        self.Tickets.ticketArray = self.app.contentViewModel().myTickets();
+      } else if (localStorage.ticketCache) {
+        self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
       }
       //return results
       if (self.Tickets.ticketArray) {
@@ -184,7 +183,7 @@ function Dashboard(app) {
       } else {
         alert('Unable to access tickets at this time!');
         return [];
-      }
+      }*/
     },
     getCritical: function() {
       var tickets = this.getTickets(),
