@@ -132,13 +132,11 @@ function Dashboard(application, ko, bootbox) {
         data = month;
         month = null;
       }
-      console.log(data);
       this.current_date = new Date();
       this.day_labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       this.month_labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       this.month = (isNaN(month) || month === null) ? this.current_date.getMonth() : month;
       this.year = (isNaN(year) || year === null) ? this.current_date.getFullYear() : year;
-      console.log((this.month+1)+'/'+day+'/'+this.year);
       this.draw = function(ele){
           if (this.month > 11) {
             this.month -= 12;
