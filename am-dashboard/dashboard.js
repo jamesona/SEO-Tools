@@ -112,8 +112,8 @@ function Dashboard(app) {
   };
   this.Tickets = {
     calendar: function(month, year, data) {
-      console.log(data);
       if (typeof(month) == Object) {data = month, month = null;}
+      console.log(data);
       this.current_date = new Date();
       this.day_labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       this.month_labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
