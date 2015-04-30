@@ -16,6 +16,8 @@
 
 function Dashboard(app) {
   var self = this;
+  console.log(app);
+  app.contentViewModel = app.contentViewModel();
   this.Tools = {
     bobCal: function(){},
     openClient: function(client) {
