@@ -53,12 +53,17 @@ function Dashboard(app) {
     todoistExport: function(){
       var data = ko.dataFor(app).contentViewModel().customersDataTable.dataSource(),
       taskDate = function(day){
-        var days = [], days[0] = new Date(),
-        days[1] new Date(),
-        days[2] new Date();
-        if (days[0].getDay() == 5) {days[1].setDate(days[0].getDate()+3);days[2].setDate(days[1].getDate(+1))}
-        else if (days[0].getDay() == 4) {days[1].setDate(days[0].getDate()+1);days[2].setDate(days[1].getDate(+3))}
-        else {days[1].setDate(days[0].getDate()+1);days[2].setDate(days[1].getDate(+1))}
+        var days = [new Date(),new Date(),new Date()];
+        if (days[0].getDay() == 5) {
+          days[1].setDate(days[0].getDate()+3);
+          days[2].setDate(days[0].getDate()+4);
+        } else if (days[0].getDay() == 4) {
+          days[1].setDate(days[0].getDate()+1);
+          days[2].setDate(days[0].getDate()+4);
+        } else {
+          days[1].setDate(days[0].getDate()+1);
+          days[2].setDate(days[0].getDate()+2);
+        }
         return 'date 'days[day].toDateString().substring(4);
       };
       export = data.CustomerId+' - '+data.Name+'[[NOTE]]: https://launchpad.boostability.com/#customerservice/customersearch/'+data.CustomerId;
