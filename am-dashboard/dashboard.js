@@ -284,12 +284,14 @@ function Dashboard(application, ko, bootbox) {
       return data;
     },
     listTickets: function(tickets){
-      var list = document.createElement('table');
+      var list = document.createElement('table'),
+      head = list.appendChild(document.createElement('tr'));
+      head.innerHTML = '<th>Business Name</th><th>Ticket Type</th><th>Due Date</th>';
       for (var i=0;i<tickets.length;i++){
         var ticket = tickets[i],
         listItem = document.createElement('tr'),
         content = '<td>'+ticket.CompanyName+'</td><td>'+ticket.TicketTypeName+'</td>';
-        content += '<td>Due: '+(ticket.ScheduledEndDate.getMonth()+1);
+        content += '<td>'+(ticket.ScheduledEndDate.getMonth()+1);
         content += '/'+ticket.ScheduledEndDate.getDate()+'/';
         content += ticket.ScheduledEndDate.getFullYear()+'</td>';
         listItem.innerHTML = content;
