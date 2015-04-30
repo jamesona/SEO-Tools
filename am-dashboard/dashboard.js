@@ -53,7 +53,6 @@ function Dashboard(application, ko, bootbox) {
       }
       return data;
     },
-    bobCal: function(){},
     todoistExport: function (){
       var view, data,
       taskDate = function(day){
@@ -331,6 +330,15 @@ function Dashboard(application, ko, bootbox) {
       self.Tools.todoistExport();
     },
   }),
+  this.HTML.bobCalendar = this.Tools.createElement(this.HTML.toolsMenu, 'li', {
+    innerHTML: '<a>BoB Calendar</a>',
+    onclick: function(){
+      var node = bootbox.alert('none')[0].children[0].children[0].children[0],
+      data = self.Tools.bobParse(prompt('Paste BoB data')),
+      calendar = new self.Tickets.calendar(data);
+      calendar.draw(node);
+    }
+  }),
   this.HTML.tickets = this.Tools.createElement(this.HTML.nav, 'li', {
     innerHTML: '<a class="dropdown-toggle" data-toggle="dropdown">Tickets</a>',
     className: 'dropup',
@@ -344,7 +352,6 @@ function Dashboard(application, ko, bootbox) {
       var node = bootbox.alert('none')[0].children[0].children[0].children[0],
       data = self.Tickets.sortTickets(),
       calendar = new self.Tickets.calendar(data);
-      console.log(data);
       calendar.draw(node);
     }
   }),
