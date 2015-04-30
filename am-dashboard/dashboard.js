@@ -3,7 +3,12 @@
     var url = 'https://rawgit.com/jamesona/SEO-Tools/master/am-dashboard/dashboard.js';
     document.head.appendChild(document.createElement('script')).src=url;
     function initialize(){
-      if (typeof(Dashboard) !== 'undefined' && typeof(ko) !== 'undefined' && ko.dataFor(app) !== undefined) {
+      if (
+          typeof(Dashboard) !== 'undefined' &&
+          typeof(bootbox) !== 'undefined' &&
+          typeof(ko) !== 'undefined' &&
+          ko.dataFor(app) !== undefined
+          ) {
           db = new Dashboard(ko.dataFor(app), ko, bootbox);
       } else {
           setTimeout(function(){initialize()}, 100);
