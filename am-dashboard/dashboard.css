@@ -56,11 +56,14 @@
   width: 100%;
 }
 .ticket-list th {
-  text-align: center;
+  padding-left: 4px;
 }
 .ticket-list td {
   border: 1px solid black;
   padding: 4px;
+}
+.ticket-list tr:first-Child:hover {
+  background-color: initial;
 }
 .ticket-list tr:hover {
   background-color: rgba(30,30,30,0.1);
