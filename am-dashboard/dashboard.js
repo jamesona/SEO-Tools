@@ -24,7 +24,7 @@ function Dashboard(application, ko, bootbox) {
   console.log(this.app);
   this.Tools = {
     bobParse: function(raw){ 
-      var clients = [], data = {};
+      var clients = [], data = {type: 'Clients'};
       // exit on null entry
       if ( raw === null ) return;
       for (var cells = raw.replace(/Basic[\r\n\s\ta-z]*Partner ID[\t\s]+/i, '').split(/\t/),
@@ -186,7 +186,7 @@ function Dashboard(application, ko, bootbox) {
           //if data argument present, append key value for current day
           if (data) {
             var today = (this.month+1)+'/'+day+'/'+this.year;
-            if (data[today]) html += '<p>'+Object.keys(data[today]).length+' Clients</p>';
+            if (data[today]) html += '<p>'+Object.keys(data[today]).length+' '+data[type]+'</p>';
           }
           html += '</td>';
           if ( (day + startingDay) % 7 === 0 && day != monthLength ) html += '</tr><tr>';
@@ -273,7 +273,7 @@ function Dashboard(application, ko, bootbox) {
       if (! tickets){
         tickets = this.getTickets();
       }
-      var data = {};
+      var data = {type: 'Tickets'};
       for (var i=0;i<tickets.length;i++){
         var ticket = tickets[i],
         date = new Date(ticket.ScheduledEndDate),
