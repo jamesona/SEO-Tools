@@ -50,8 +50,28 @@ function Dashboard(app) {
       return data;
     },
     bobCal: function(){},
-    db.Tools.todoistExport = function (){
-      var view;
+    todoistExport = function (){
+      var view, data,
+      taskDate = function(day){
+        var days = [new Date(),new Date(),new Date()];
+        if (days[0].getDay() == 5) {
+          days[1].setDate(days[0].getDate()+3);
+          days[2].setDate(days[0].getDate()+4);
+        } else if (days[0].getDay() == 4) {
+          days[1].setDate(days[0].getDate()+1);
+          days[2].setDate(days[0].getDate()+4);
+        } else {
+          days[1].setDate(days[0].getDate()+1);
+          days[2].setDate(days[0].getDate()+2);
+        }
+        return 'date '+days[day].toDateString().substring(4);
+      },
+      textarea = document.createElement('textarea'), text = '',
+      modal = bootbox.alert({ 
+          size: 'large',
+          message: 'placeholder', 
+          callback: function(result){ /* your callback code */ }
+      })[0].children[0].children[0].children[0].children[1];
       if (ko.dataFor(window.app) !== undefined){
         view = ko.dataFor(window.app).contentViewModel();
       } else if (ko.dataFor(self.app) !== undefined){
@@ -61,29 +81,13 @@ function Dashboard(app) {
         bootbox.alert('No client in active view.\nTry running this tool while viewing a client.');
         return 1;
       } else {
-        if (typeof(view.customersDataTable) === undefined) {console.log('No customersDataTable');return;}
-        var data = view.customersDataTable.dataSource()[0],
-        taskDate = function(day){
-          var days = [new Date(),new Date(),new Date()];
-          if (days[0].getDay() == 5) {
-            days[1].setDate(days[0].getDate()+3);
-            days[2].setDate(days[0].getDate()+4);
-          } else if (days[0].getDay() == 4) {
-            days[1].setDate(days[0].getDate()+1);
-            days[2].setDate(days[0].getDate()+4);
-          } else {
-            days[1].setDate(days[0].getDate()+1);
-            days[2].setDate(days[0].getDate()+2);
-          }
-          return 'date '+days[day].toDateString().substring(4);
-        },
-        textarea = document.createElement('textarea'),
-        modal = bootbox.alert({ 
-            size: 'large',
-            message: 'placeholder', 
-            callback: function(result){ /* your callback code */ }
-        })[0].children[0].children[0].children[0].children[1],
-        text = data.CustomerId+' - '+data.Name;
+        if (typeof(view.customersDataTable) === undefined) {
+          console.log('No customersDataTable');
+          return;
+        } else {
+          data = view.customersDataTable.dataSource()[0];
+        }
+        text += data.CustomerId+' - '+data.Name;
         text += '[[NOTE]]: https://launchpad.boostability.com/#customerservice/customersearch/'+data.CustomerId;
         text += '\n...'+data.CustomerId+' Welcome Call [['+taskDate(2)+']]';
         text += '\n......'+data.CustomerId+' 1st Welcome Call [['+taskDate(0)+']]';
