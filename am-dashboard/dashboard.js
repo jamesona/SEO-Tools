@@ -184,7 +184,7 @@ function Dashboard(application, ko, bootbox) {
           //if data argument present, append key value for current day
           if (data) {
             var today = (this.month+1)+'/'+day+'/'+this.year;
-            if (data[today]) html += '<p>'+Object.keys(data[today]).length+' '+data[type]+'</p>';
+            if (data[today]) html += '<p>'+Object.keys(data[today]).length+' '+data['type']+'</p>';
           }
           html += '</td>';
           if ( (day + startingDay) % 7 === 0 && day != monthLength ) html += '</tr><tr>';
