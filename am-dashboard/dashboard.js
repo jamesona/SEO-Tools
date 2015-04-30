@@ -212,15 +212,13 @@ function Dashboard(app) {
       if (self.app.contentViewModel() !== undefined){
         if (typeof(self.app.contentViewModel().myTickets) === "function"){
           self.Tickets.ticketArray = self.app.contentViewModel().myTickets();
-        } else if (localStorage.ticketCache) {
-          self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
-        }
-      } else {
-        self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
+        } 
+      } else if (localStorage.getItem('ticketCache') !== null){
+        self.Tickets.ticketArray = JSON.parse(localStorage.getItem('ticketCache'));
       }
       //return results
       if (self.Tickets.ticketArray) {
-        localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
+        localStorage.setItem('ticketCache', JSON.stringify(self.Tickets.ticketArray));
         return self.Tickets.ticketArray;
       } else {
         alert('Unable to access tickets at this time!');
@@ -344,5 +342,5 @@ function Dashboard(app) {
       self.Tickets.tryCache();  
     }
   };
-  if (localStorage.ticketCache) self.Tickets.ticketArray = JSON.parse(localStorage.getItem('ticketCache'));
+  if (localStorage.getItem('ticketCache') !== null) self.Tickets.ticketArray = JSON.parse(localStorage.getItem('ticketCache'));
 }
