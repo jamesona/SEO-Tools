@@ -51,7 +51,17 @@ function Dashboard(app) {
     },
     bobCal: function(){},
     todoistExport: function(){
-      var data = ko.dataFor(app).contentViewModel().customersDataTable.dataSource(),
+      if (ko.dataFor(window.app) !== undefined){
+        var data = ko.dataFor(window.app).contentViewModel().customersDataTable.dataSource();
+      } else if (ko.dataFor(self.app) !== undefined){
+        var test = ko.dataFor(self.app).contentViewModel();
+        if (test.hasOwnProperty('customersDataTable')){
+          var data = test.customersDataTable.dataSource();
+        }
+      } else {
+        bootbox.alert('No client in active view.\nTry running this tool while viewing a client.');
+        return;
+      }
       taskDate = function(day){
         var days = [new Date(),new Date(),new Date()];
         if (days[0].getDay() == 5) {
