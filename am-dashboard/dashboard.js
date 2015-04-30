@@ -386,7 +386,7 @@ function Dashboard(application, ko, bootbox) {
     },
   });
   this.HTML.critical = this.Tools.createElement(this.HTML.nav, 'li', {
-    innerHTML: self.Tickets.countCritical(),
+    innerHTML: '<a>Show Critical Count</a>',
     id: 'critical',
     onclick: function(){
       self.HTML.critical.innerHTML = self.Tickets.countCritical();
