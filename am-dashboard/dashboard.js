@@ -104,7 +104,7 @@ function Dashboard(application, ko, bootbox) {
         text += '\n...'+data.CustomerId+' Keyword Research';
         text += '\n...'+data.CustomerId+' Local Profile';
         textarea.value = text;
-        modal.parentNode.parentNode.parentNode.style.width = "65em";
+        modal.parentNode.parentNode.parentNode.style.width = "65.5em";
         modal.innerHTML = '<pre>'+text+'</pre>';
       }
     },
