@@ -19,24 +19,6 @@ function Dashboard(app) {
   this.app = app;
   console.log(this.app);
   this.Tools = {
-    bobCal: function(){},
-    openClient: function(client) {
-      self.app.showManageCustomer(client);
-    },
-    closeClient: function() {
-      var buttons = document.getElementsByClassName('close'),
-      i = buttons.length - 1;
-      if (i >= 1) buttons[i - 1].click();
-    },
-    createElement: function(parent, tag, attributes) {
-      var element = parent.appendChild(document.createElement(tag));
-      for (var attribute in attributes) {
-        if (attributes.hasOwnProperty(attribute)) {
-          element[attribute] = attributes[attribute];
-        }
-      }
-      return element;
-    },
     bobParse: function(raw){ 
       var clients = [], data = {};
       // exit on null entry
@@ -66,6 +48,47 @@ function Dashboard(app) {
         data[date].push(clients[i]);
       }
       return data;
+    },
+    bobCal: function(){},
+    todoistExport: function(){
+      var data = ko.dataFor(app).contentViewModel().customersDataTable.dataSource(),
+      taskDate = function(day){
+        var days = [], days[0] = new Date(),
+        days[1] new Date(),
+        days[2] new Date();
+        if (days[0].getDay() == 5) {days[1].setDate(days[0].getDate()+3);days[2].setDate(days[1].getDate(+1))}
+        else if (days[0].getDay() == 4) {days[1].setDate(days[0].getDate()+1);days[2].setDate(days[1].getDate(+3))}
+        else {days[1].setDate(days[0].getDate()+1);days[2].setDate(days[1].getDate(+1))}
+        return 'date 'days[day].toDateString().substring(4);
+      };
+      export = data.CustomerId+' - '+data.Name+'[[NOTE]]: https://launchpad.boostability.com/#customerservice/customersearch/'+data.CustomerId;
+      export += '\n...'+data.CustomerId+' Welcome Call [['+taskDate(2)+']]';
+      export += '\n......'+data.CustomerId+' 1st Welcome Call [['+taskDate(0)+']]';
+      export += '\n......'+data.CustomerId+' 1st Welcome Email [['+taskDate(0)+']]';
+      export += '\n......'+data.CustomerId+' 2nd Welcome Call [['+taskDate(1)+']]';
+      export += '\n......'+data.CustomerId+' 2nd Welcome Email [['+taskDate(1)+']]';
+      export += '\n......'+data.CustomerId+' 3rd Welcome Call [['+taskDate(2)+']]';
+      export += '\n......'+data.CustomerId+' 3rd Welcome Email [['+taskDate(2)+']]';
+      export += '\n...'+data.CustomerId+' Keyword Research';
+      export += '\n...'+data.CustomerId+' Local Profile';
+      bootbox.alert(export);
+    },
+    openClient: function(client) {
+      self.app.showManageCustomer(client);
+    },
+    closeClient: function() {
+      var buttons = document.getElementsByClassName('close'),
+      i = buttons.length - 1;
+      if (i >= 1) buttons[i - 1].click();
+    },
+    createElement: function(parent, tag, attributes) {
+      var element = parent.appendChild(document.createElement(tag));
+      for (var attribute in attributes) {
+        if (attributes.hasOwnProperty(attribute)) {
+          element[attribute] = attributes[attribute];
+        }
+      }
+      return element;
     },
   };
   this.Tickets = {
@@ -266,6 +289,12 @@ function Dashboard(app) {
   }),
   this.HTML.toolsMenu = this.Tools.createElement(this.HTML.tools, 'ul', {
     className: 'dropdown-menu',
+  }),
+  this.HTML.todoistExport = this.Tools.createElement(this.HTML.toolsMenu, 'li', {
+    innerHTML: '<a>Todoist Export</a>',
+    onclick: function(){
+      self.Tools.todoistExport();
+    },
   }),
   this.HTML.tickets = this.Tools.createElement(this.HTML.nav, 'li', {
     innerHTML: '<a class="dropdown-toggle" data-toggle="dropdown">Tickets</a>',
