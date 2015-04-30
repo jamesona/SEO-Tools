@@ -14,7 +14,7 @@
   })();
 */
 
-function Dashboard(app) {
+function Dashboard(app, ko, bootbox) {
   var self = this;
   this.app = app;
   console.log(this.app);
@@ -50,7 +50,7 @@ function Dashboard(app) {
       return data;
     },
     bobCal: function(){},
-    todoistExport = function (){
+    todoistExport: function (){
       var view, data,
       taskDate = function(day){
         var days = [new Date(),new Date(),new Date()];
@@ -70,7 +70,7 @@ function Dashboard(app) {
       modal = bootbox.alert({ 
           size: 'large',
           message: 'placeholder', 
-          callback: function(result){ /* your callback code */ }
+          callback: function(){},
       })[0].children[0].children[0].children[0].children[1];
       if (ko.dataFor(window.app) !== undefined){
         view = ko.dataFor(window.app).contentViewModel();
@@ -123,7 +123,10 @@ function Dashboard(app) {
   };
   this.Tickets = {
     calendar: function(month, year, data) {
-      if (typeof(month) == Object) {data = month, month = null;}
+      if ( typeof(month) === Object ) {
+				data = month;
+        month = null;
+      }
       console.log(data);
       this.current_date = new Date();
       this.day_labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -335,16 +338,18 @@ function Dashboard(app) {
     innerHTML: '<a>Calendar</a>',
     onclick: function(){
       var node = bootbox.alert('none')[0].children[0].children[0].children[0],
-      data = self.Tickets.sortTickets();
-      console.log(data);
+      data = self.Tickets.sortTickets(),
       calendar = new self.Tickets.calendar(data);
+      console.log(data);
       calendar.draw(node);
     }
   }),
   this.HTML.critical = this.Tools.createElement(this.HTML.nav, 'li', {
-    innerHTML: self.Tickets.countCritical(), //'<a>Click to show Critical</a>',
+    innerHTML: self.Tickets.countCritical(),
     id: 'critical',
-    onclick: function(){this.innerHTML = self.Tickets.countCritical();},
+    onclick: function(){
+      self.HTML.critical.innerHTML = self.Tickets.countCritical();
+    },
   });
   
   window.beforeunload = function(){
