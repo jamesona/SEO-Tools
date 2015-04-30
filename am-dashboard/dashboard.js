@@ -50,7 +50,7 @@ function Dashboard(app) {
       return data;
     },
     bobCal: function(){},
-    todoistExport: function(){
+    db.Tools.todoistExport = function (){
       var view;
       if (ko.dataFor(window.app) !== undefined){
         view = ko.dataFor(window.app).contentViewModel();
@@ -61,9 +61,8 @@ function Dashboard(app) {
         bootbox.alert('No client in active view.\nTry running this tool while viewing a client.');
         return 1;
       } else {
-        console.log(view);
         if (typeof(view.customersDataTable) === undefined) {console.log('No customersDataTable');return;}
-        var data = view.customersDataTable.dataSource(),
+        var data = view.customersDataTable.dataSource()[0],
         taskDate = function(day){
           var days = [new Date(),new Date(),new Date()];
           if (days[0].getDay() == 5) {
@@ -79,6 +78,11 @@ function Dashboard(app) {
           return 'date '+days[day].toDateString().substring(4);
         },
         textarea = document.createElement('textarea'),
+        modal = bootbox.alert({ 
+            size: 'large',
+            message: 'placeholder', 
+            callback: function(result){ /* your callback code */ }
+        })[0].children[0].children[0].children[0].children[1],
         text = data.CustomerId+' - '+data.Name;
         text += '[[NOTE]]: https://launchpad.boostability.com/#customerservice/customersearch/'+data.CustomerId;
         text += '\n...'+data.CustomerId+' Welcome Call [['+taskDate(2)+']]';
@@ -91,7 +95,8 @@ function Dashboard(app) {
         text += '\n...'+data.CustomerId+' Keyword Research';
         text += '\n...'+data.CustomerId+' Local Profile';
         textarea.value = text;
-        bootbox.alert(textarea);
+        modal.parentNode.parentNode.parentNode.style.width = "65em";
+        modal.innerHTML = '<pre>'+text+'</pre>';
       }
     },
     openClient: function(client) {
