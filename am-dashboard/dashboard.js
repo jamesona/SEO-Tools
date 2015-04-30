@@ -307,7 +307,7 @@ function Dashboard(application, ko, bootbox) {
     showTickets: function(tickets){
       bootbox.dialog({
         message: self.Tickets.listTickets(tickets),
-        title: "Tickets",
+        title: "Tickets (click row to open client)",
         className: "ticket-list",
         buttons: {},
       });
