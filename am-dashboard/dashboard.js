@@ -66,7 +66,8 @@ function Dashboard(app) {
         }
         return 'date '+days[day].toDateString().substring(4);
       };
-      var text = data.CustomerId+' - '+data.Name+'[[NOTE]]: https://launchpad.boostability.com/#customerservice/customersearch/'+data.CustomerId;
+      var text = data.CustomerId+' - '+data.Name;
+      text += '[[NOTE]]: https://launchpad.boostability.com/#customerservice/customersearch/'+data.CustomerId;
       text += '\n...'+data.CustomerId+' Welcome Call [['+taskDate(2)+']]';
       text += '\n......'+data.CustomerId+' 1st Welcome Call [['+taskDate(0)+']]';
       text += '\n......'+data.CustomerId+' 1st Welcome Email [['+taskDate(0)+']]';
