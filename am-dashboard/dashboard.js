@@ -35,6 +35,50 @@ function Dashboard(app) {
       }
       return element;
     },
+    bobParse: function(){ 
+      var data = {}, complete = false; 
+      bootbox.prompt(
+        'Copy all cells (Ctrl+A, Ctrl+C) and paste here', 
+        function(response){
+          // exit on null entry
+          if ( response == null ) return;
+          // remove column headers and divide cells
+          cells = response.replace(/Basic.*Partner ID[\t\s]+/i, '').split(/\t/);
+          var clients = [], client = {}, i = 0,
+          cols = ['Account ID',	'Account Start Date',	'Account Bucket',	'Account Spend',
+          'Date of Next Ticket',	'Engaged Status',	'Timezone',	'Welcome Call',	'Keyword Research',
+          'Local Profile Tab',	'Obtain or Create Google Logins',	'Create and Verify Google Profile',
+          'Obtain Site Access',	'Implement Onsite Edits',	'Create Yahoo Account',	'Create and Verify Yahoo Profile',
+          'Create and Verify Bing Profile',	'Install Analytics',	'Company Name',	'Contact Name',	'Website URL',	
+          'Email Address',	'Phone Number',	'Partner ID',];
+          while (cells.length>0){
+            switch (Object.keys(client).length){
+              case 0:
+              case 1:
+              case 1:
+              case 1:
+              case 1:
+              case 1:
+              case 1:
+              case 1:
+              case 1:
+              case 1:
+              case 1:
+              case 1:
+              case 1:
+              case 1case 1:
+                client.id = cells[0];
+                cells.shift();
+                break;
+            }
+          }
+          complete = true;
+        }
+      );
+      var test = function(){
+        if (complete) {return data;} else {setTimeout((function(){test()}), 100)}
+      }; test();
+    },
   };
   this.Tickets = {
     calendar: function(month, year, data) {
@@ -136,13 +180,12 @@ function Dashboard(app) {
     },
     getTickets: function() {
       //get tickets
-      console.log(app);
       try {
-      if (typeof(app.contentViewModel().myTickets) === "function"){
-        self.Tickets.ticketArray = app.contentViewModel().myTickets();
-      } else if (localStorage.ticketCache) {
-        self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
-      }
+        if (typeof(app.contentViewModel().myTickets) === "function"){
+          self.Tickets.ticketArray = app.contentViewModel().myTickets();
+        } else if (localStorage.ticketCache) {
+          self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
+        }
       } catch(err) {
         console.log(err.message);
       }
