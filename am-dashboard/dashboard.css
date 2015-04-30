@@ -14,7 +14,7 @@
 .calendar thead > tr {
   border: 1px solid black;
 }
-.calendar th, #modal > div > table > tbody > tr.header > td {
+.calendar th, .calendar tr.header > td {
   text-align: center;
   font-size: 1.2em;
   height: 1em;
