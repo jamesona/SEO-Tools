@@ -64,7 +64,7 @@ function Dashboard(app) {
           days[1].setDate(days[0].getDate()+1);
           days[2].setDate(days[0].getDate()+2);
         }
-        return 'date 'days[day].toDateString().substring(4);
+        return 'date '+days[day].toDateString().substring(4);
       };
       export = data.CustomerId+' - '+data.Name+'[[NOTE]]: https://launchpad.boostability.com/#customerservice/customersearch/'+data.CustomerId;
       export += '\n...'+data.CustomerId+' Welcome Call [['+taskDate(2)+']]';
