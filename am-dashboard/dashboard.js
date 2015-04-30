@@ -1,4 +1,3 @@
-
 /* call using this enclosure
   (function(){
     var url = 'https://rawgit.com/jamesona/SEO-Tools/master/am-dashboard/dashboard.js';
@@ -52,10 +51,11 @@ function Dashboard(app) {
     },
     bobCal: function(){},
     todoistExport: function(){
+      var view;
       if (ko.dataFor(window.app) !== undefined){
-        var view = ko.dataFor(window.app).contentViewModel();
+        view = ko.dataFor(window.app).contentViewModel();
       } else if (ko.dataFor(self.app) !== undefined){
-        var view = ko.dataFor(self.app).contentViewModel();
+        view = ko.dataFor(self.app).contentViewModel();
       } 
       if (! view.hasOwnProperty('customersDataTable')){
         bootbox.alert('No client in active view.\nTry running this tool while viewing a client.');
