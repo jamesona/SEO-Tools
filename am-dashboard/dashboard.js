@@ -35,53 +35,40 @@ function Dashboard(app) {
       }
       return element;
     },
-    bobParse: function(){ 
-      var data = {}, complete = false; 
-      bootbox.prompt(
-        'Copy all cells (Ctrl+A, Ctrl+C) and paste here', 
-        function(response){
-          // exit on null entry
-          if ( response == null ) return;
-          // remove column headers and divide cells
-          cells = response.replace(/Basic.*Partner ID[\t\s]+/i, '').split(/\t/);
-          var clients = [], client = {}, i = 0,
-          cols = ['Account ID',	'Account Start Date',	'Account Bucket',	'Account Spend',
-          'Date of Next Ticket',	'Engaged Status',	'Timezone',	'Welcome Call',	'Keyword Research',
-          'Local Profile Tab',	'Obtain or Create Google Logins',	'Create and Verify Google Profile',
-          'Obtain Site Access',	'Implement Onsite Edits',	'Create Yahoo Account',	'Create and Verify Yahoo Profile',
-          'Create and Verify Bing Profile',	'Install Analytics',	'Company Name',	'Contact Name',	'Website URL',	
-          'Email Address',	'Phone Number',	'Partner ID',];
-          while (cells.length>0){
-            switch (Object.keys(client).length){
-              case 0:
-              case 1:
-              case 1:
-              case 1:
-              case 1:
-              case 1:
-              case 1:
-              case 1:
-              case 1:
-              case 1:
-              case 1:
-              case 1:
-              case 1:
-              case 1case 1:
-                client.id = cells[0];
-                cells.shift();
-                break;
-            }
-          }
-          complete = true;
+    bobParse: function(raw){ 
+      var clients = [], data = {};
+      // exit on null entry
+      if ( raw == null ) return;
+      for (var cells = raw.replace(/Basic[\r\n\s\ta-z]*Partner ID[\t\s]+/i, '').split(/\t/),
+        client = {}, cols = ['Account ID',	'Account Start Date',	'Account Bucket',	'Account Spend',
+        'Date of Next Ticket',	'Engaged Status',	'Timezone',	'Welcome Call',	'Keyword Research',
+        'Local Profile Tab',	'Obtain or Create Google Logins',	'Create and Verify Google Profile',
+        'Obtain Site Access',	'Implement Onsite Edits',	'Create Yahoo Account',	'Create and Verify Yahoo Profile',
+        'Create and Verify Bing Profile',	'Install Analytics',	'Company Name',	'Contact Name',	'Website URL',	
+        'Email Address',	'Phone Number',	'Partner ID',];
+        cells.length>0;){
+        keys = Object.keys(client).length;
+        if (keys<cols.length-1){
+          var param = cols[keys];
+          client[param] = cells[0];
+          cells.shift();
+        } else {
+          client.count = keys;
+          clients.push(client);
+          client = {};
         }
-      );
-      var test = function(){
-        if (complete) {return data;} else {setTimeout((function(){test()}), 100)}
-      }; test();
+      }
+      for (var i=0;i<clients.length;i++){
+        var date = clients[i]['Date of Next Ticket']
+        if (data[date] === undefined) data[date] = [];
+        data[date].push(clients[i]);
+      }
+      return data;
     },
   };
   this.Tickets = {
     calendar: function(month, year, data) {
+      console.log(data);
       if (typeof(month) == Object) {data = month, month = null;}
       this.current_date = new Date();
       this.day_labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
