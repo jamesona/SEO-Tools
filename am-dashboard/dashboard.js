@@ -52,42 +52,42 @@ function Dashboard(app) {
     bobCal: function(){},
     todoistExport: function(){
       if (ko.dataFor(window.app) !== undefined){
-        var data = ko.dataFor(window.app).contentViewModel().customersDataTable.dataSource();
+        var view = ko.dataFor(window.app).contentViewModel();
       } else if (ko.dataFor(self.app) !== undefined){
-        var test = ko.dataFor(self.app).contentViewModel();
-        if (test.hasOwnProperty('customersDataTable')){
-          var data = test.customersDataTable.dataSource();
-        }
-      } else {
+        var view = ko.dataFor(self.app).contentViewModel();
+      } 
+      if (! test.hasOwnProperty('customersDataTable')){
         bootbox.alert('No client in active view.\nTry running this tool while viewing a client.');
-        return;
+        return 1;
+      } else {
+        var data = view.customersDataTable.dataSource(),
+        taskDate = function(day){
+          var days = [new Date(),new Date(),new Date()];
+          if (days[0].getDay() == 5) {
+            days[1].setDate(days[0].getDate()+3);
+            days[2].setDate(days[0].getDate()+4);
+          } else if (days[0].getDay() == 4) {
+            days[1].setDate(days[0].getDate()+1);
+            days[2].setDate(days[0].getDate()+4);
+          } else {
+            days[1].setDate(days[0].getDate()+1);
+            days[2].setDate(days[0].getDate()+2);
+          }
+          return 'date '+days[day].toDateString().substring(4);
+        },
+        text = data.CustomerId+' - '+data.Name;
+        text += '[[NOTE]]: https://launchpad.boostability.com/#customerservice/customersearch/'+data.CustomerId;
+        text += '\n...'+data.CustomerId+' Welcome Call [['+taskDate(2)+']]';
+        text += '\n......'+data.CustomerId+' 1st Welcome Call [['+taskDate(0)+']]';
+        text += '\n......'+data.CustomerId+' 1st Welcome Email [['+taskDate(0)+']]';
+        text += '\n......'+data.CustomerId+' 2nd Welcome Call [['+taskDate(1)+']]';
+        text += '\n......'+data.CustomerId+' 2nd Welcome Email [['+taskDate(1)+']]';
+        text += '\n......'+data.CustomerId+' 3rd Welcome Call [['+taskDate(2)+']]';
+        text += '\n......'+data.CustomerId+' 3rd Welcome Email [['+taskDate(2)+']]';
+        text += '\n...'+data.CustomerId+' Keyword Research';
+        text += '\n...'+data.CustomerId+' Local Profile';
+        bootbox.alert(text);
       }
-      taskDate = function(day){
-        var days = [new Date(),new Date(),new Date()];
-        if (days[0].getDay() == 5) {
-          days[1].setDate(days[0].getDate()+3);
-          days[2].setDate(days[0].getDate()+4);
-        } else if (days[0].getDay() == 4) {
-          days[1].setDate(days[0].getDate()+1);
-          days[2].setDate(days[0].getDate()+4);
-        } else {
-          days[1].setDate(days[0].getDate()+1);
-          days[2].setDate(days[0].getDate()+2);
-        }
-        return 'date '+days[day].toDateString().substring(4);
-      };
-      var text = data.CustomerId+' - '+data.Name;
-      text += '[[NOTE]]: https://launchpad.boostability.com/#customerservice/customersearch/'+data.CustomerId;
-      text += '\n...'+data.CustomerId+' Welcome Call [['+taskDate(2)+']]';
-      text += '\n......'+data.CustomerId+' 1st Welcome Call [['+taskDate(0)+']]';
-      text += '\n......'+data.CustomerId+' 1st Welcome Email [['+taskDate(0)+']]';
-      text += '\n......'+data.CustomerId+' 2nd Welcome Call [['+taskDate(1)+']]';
-      text += '\n......'+data.CustomerId+' 2nd Welcome Email [['+taskDate(1)+']]';
-      text += '\n......'+data.CustomerId+' 3rd Welcome Call [['+taskDate(2)+']]';
-      text += '\n......'+data.CustomerId+' 3rd Welcome Email [['+taskDate(2)+']]';
-      text += '\n...'+data.CustomerId+' Keyword Research';
-      text += '\n...'+data.CustomerId+' Local Profile';
-      bootbox.alert(text);
     },
     openClient: function(client) {
       self.app.showManageCustomer(client);
