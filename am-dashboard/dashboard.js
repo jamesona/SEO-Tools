@@ -83,7 +83,7 @@ function Dashboard(application, ko, bootbox) {
       } 
       if (! view.hasOwnProperty('customersDataTable')){
       	modal.remove();
-        bootbox.alert('No client data available in active view.\nTry running this tool while viewing a client.');
+        bootbox.alert('No client data available in active view.<br />Try running this tool while viewing a client.<');
         return 1;
       } else {
         if (typeof(view.customersDataTable) === undefined) {
