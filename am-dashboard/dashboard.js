@@ -279,16 +279,16 @@ function Dashboard(app) {
     }
   }),
   this.HTML.critical = this.Tools.createElement(this.HTML.nav, 'li', {
-    innerHTML: self.Tickets.countCritical(),
+    innerHTML: '<a>Click to show Critical</a>',
     id: 'critical',
     onclick: self.Tickets.countCritical(),
   });
   
   window.beforeunload = function(){
-    this.Tickets.tryCache();
+    self.Tickets.tryCache();
   };
   window.onhashchange = function(){
-    this.Tickets.tryCache();  
+    self.Tickets.tryCache();  
   };
   if (localStorage.ticketCache) self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
 }
