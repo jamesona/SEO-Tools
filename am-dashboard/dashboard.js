@@ -293,6 +293,9 @@ function Dashboard(application, ko, bootbox) {
         text += '/'+ticket.ScheduledEndDate.getDate()+'/';
         text += ticket.ScheduledEndDate.getFullYear()+')';
         listItem.innerHTML = text;
+        listItem.onclick = function(){
+          self.Tools.openClient(ticket.CustomerId);
+        };
         list.appendChild(listItem);
       }
       return list;
