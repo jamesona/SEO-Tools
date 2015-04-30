@@ -52,10 +52,15 @@
 }
 .ticket-list table {
   border-collapse: collapse;
-  border: 1px solid black;
+  border: none;
+  width: 100%;
+}
+.ticket-list th {
+  text-align: center;
 }
 .ticket-list td {
   border: 1px solid black;
+  padding: 4px;
 }
 .ticket-list tr:hover {
   background-color: rgba(30,30,30,0.1);
