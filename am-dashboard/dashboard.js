@@ -22,7 +22,7 @@ function Dashboard(app) {
     bobParse: function(raw){ 
       var clients = [], data = {};
       // exit on null entry
-      if ( raw == null ) return;
+      if ( raw === null ) return;
       for (var cells = raw.replace(/Basic[\r\n\s\ta-z]*Partner ID[\t\s]+/i, '').split(/\t/),
         client = {}, cols = ['Account ID',	'Account Start Date',	'Account Bucket',	'Account Spend',
         'Date of Next Ticket',	'Engaged Status',	'Timezone',	'Welcome Call',	'Keyword Research',
@@ -31,7 +31,7 @@ function Dashboard(app) {
         'Create and Verify Bing Profile',	'Install Analytics',	'Company Name',	'Contact Name',	'Website URL',	
         'Email Address',	'Phone Number',	'Partner ID',];
         cells.length>0;){
-        keys = Object.keys(client).length;
+        var keys = Object.keys(client).length;
         if (keys<cols.length-1){
           var param = cols[keys];
           client[param] = cells[0];
@@ -43,7 +43,7 @@ function Dashboard(app) {
         }
       }
       for (var i=0;i<clients.length;i++){
-        var date = clients[i]['Date of Next Ticket']
+        var date = clients[i]['Date of Next Ticket'];
         if (data[date] === undefined) data[date] = [];
         data[date].push(clients[i]);
       }
@@ -66,7 +66,7 @@ function Dashboard(app) {
         }
         return 'date '+days[day].toDateString().substring(4);
       };
-      text = data.CustomerId+' - '+data.Name+'[[NOTE]]: https://launchpad.boostability.com/#customerservice/customersearch/'+data.CustomerId;
+      var text = data.CustomerId+' - '+data.Name+'[[NOTE]]: https://launchpad.boostability.com/#customerservice/customersearch/'+data.CustomerId;
       text += '\n...'+data.CustomerId+' Welcome Call [['+taskDate(2)+']]';
       text += '\n......'+data.CustomerId+' 1st Welcome Call [['+taskDate(0)+']]';
       text += '\n......'+data.CustomerId+' 1st Welcome Email [['+taskDate(0)+']]';
@@ -271,7 +271,7 @@ function Dashboard(app) {
           localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
         }
       } catch(err) {
-        setTimeout(function(){self.Tickets.tryCache()}, 1000);
+        setTimeout(function(){self.Tickets.tryCache();}, 1000);
       }
     },
   };
@@ -321,7 +321,7 @@ function Dashboard(app) {
   this.HTML.critical = this.Tools.createElement(this.HTML.nav, 'li', {
     innerHTML: self.Tickets.countCritical(), //'<a>Click to show Critical</a>',
     id: 'critical',
-    onclick: function(){this.innerHTML = self.Tickets.countCritical()},
+    onclick: function(){this.innerHTML = self.Tickets.countCritical();},
   });
   
   window.beforeunload = function(){
