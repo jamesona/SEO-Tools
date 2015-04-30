@@ -284,9 +284,9 @@ function Dashboard(app) {
     }
   }),
   this.HTML.critical = this.Tools.createElement(this.HTML.nav, 'li', {
-    innerHTML: '<a>Click to show Critical</a>',
+    innerHTML: self.Tickets.countCritical(), //'<a>Click to show Critical</a>',
     id: 'critical',
-    onclick: self.Tickets.countCritical(),
+    onclick: function(){this.innerHTML = self.Tickets.countCritical()},
   });
   
   window.beforeunload = function(){
