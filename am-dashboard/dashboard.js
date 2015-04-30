@@ -237,8 +237,12 @@ function Dashboard(app) {
       return list;
     },
     tryCache: function(){
-      if (self.Tickets.ticketArray) {
-        localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
+      try {
+        if (self.Tickets.ticketArray) {
+          localStorage.ticketCache = JSON.stringify(self.Tickets.ticketArray);
+        }
+      } catch(err) {
+        setTimeout(function(){self.Tickets.tryCache()}, 1000);
       }
     },
   };
@@ -288,7 +292,9 @@ function Dashboard(app) {
     self.Tickets.tryCache();
   };
   window.onhashchange = function(){
-    self.Tickets.tryCache();  
+    if (window.location.href == 'https://launchpad.boostability.com/#/customerservice/activetickets'){
+      self.Tickets.tryCache();  
+    }
   };
   if (localStorage.ticketCache) self.Tickets.ticketArray = JSON.parse(localStorage.ticketCache);
 }
