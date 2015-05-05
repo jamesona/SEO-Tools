@@ -105,4 +105,8 @@ Tools = function(self){
     self.Tools.closeClient();
     self.Tools.openClient(tickets[0].CustomerId);
   };
+  this.today = function(){
+    var date = new Date();
+    return (date.getMonth()+1)+'/'+date.getDate()+'/'+date.getFullYear();
+  }
 };
