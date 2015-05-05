@@ -109,4 +109,42 @@ Tools = function(self){
     var date = new Date();
     return (date.getMonth()+1)+'/'+date.getDate()+'/'+date.getFullYear();
   }
+  this.httpRequest = function(data){
+    var URL = data.url,
+    headers = data.headers,
+    request = new XMLHttpRequest();
+    request.open( "GET", URL, false );
+    for (var header in headers) {
+      if (headers.hasOwnProperty(header)) {
+          request.setRequestHeader(header, headers[header]);
+      }
+    }
+    request.send( null );
+    return request.responseText;
+  };
+  this.getKeywords = function(client){ 
+   var activeResponse = httpRequest({
+      url:'https://launchpad.boostability.com/WebsiteUrlApi/WebsiteUrl_SelectActiveUrls?customerId='+client,
+      headers: {
+        'Accept': '*/*',
+        'Accept-Encoding': 'gzip, deflate, sdch',
+        'Accept-Language': 'en-US,en;q=0.8',
+        'Cookie': document.cookie,
+        'Referer': 'https://launchpad.boostability.com/'},
+        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36',
+        'X-Requested-With': 'XMLHttpRequest',
+    }),
+   trackingResponse = httpRequest({
+      url:'https://launchpad.boostability.com/WebsiteKeywordTrackingApi/WebsiteKeywordTracking_Select?customerId='+client,
+      headers: {
+        'Accept': '*/*',
+        'Accept-Encoding': 'gzip, deflate, sdch',
+        'Accept-Language': 'en-US,en;q=0.8',
+        'Cookie': document.cookie,
+        'Referer': 'https://launchpad.boostability.com/'},
+        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36',
+        'X-Requested-With': 'XMLHttpRequest',
+    });
+   //todo parse the recived data, and build return object
+  };
 };
