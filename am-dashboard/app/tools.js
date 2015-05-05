@@ -122,6 +122,21 @@ Tools = function(self){
     request.send( null );
     return request.responseText;
   };
+  this.getClient = function(client){
+    var response = this.httpRequest({
+      url:'https://launchpad.boostability.com/CustomerApi/Customer_Select?customerId='+client,
+      headers: {
+        'Accept': '*/*',
+        'Accept-Encoding': 'gzip, deflate, sdch',
+        'Accept-Language': 'en-US,en;q=0.8',
+        'Cookie': document.cookie,
+        'Referer': 'https://launchpad.boostability.com/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36',
+        'X-Requested-With': 'XMLHttpRequest',
+      }
+    });
+    return JSON.parse(response);
+  };
   this.getKeywords = (client){ 
     var activeResponse = this.httpRequest({
       url:'https://launchpad.boostability.com/WebsiteUrlApi/WebsiteUrl_SelectActiveUrls?customerId='+client,
@@ -130,9 +145,10 @@ Tools = function(self){
         'Accept-Encoding': 'gzip, deflate, sdch',
         'Accept-Language': 'en-US,en;q=0.8',
         'Cookie': document.cookie,
-        'Referer': 'https://launchpad.boostability.com/'},
+        'Referer': 'https://launchpad.boostability.com/',
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36',
         'X-Requested-With': 'XMLHttpRequest',
+      }
     }),
     trackingResponse = this.httpRequest({
       url:'https://launchpad.boostability.com/WebsiteKeywordTrackingApi/WebsiteKeywordTracking_Select?customerId='+client,
@@ -141,9 +157,10 @@ Tools = function(self){
         'Accept-Encoding': 'gzip, deflate, sdch',
         'Accept-Language': 'en-US,en;q=0.8',
         'Cookie': document.cookie,
-        'Referer': 'https://launchpad.boostability.com/'},
+        'Referer': 'https://launchpad.boostability.com/',
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36',
         'X-Requested-With': 'XMLHttpRequest',
+      }
     });
     return {active: JSON.parse(activeResponse).Data, tracking: JSON.parse(trackingResponse).Data};
   };
