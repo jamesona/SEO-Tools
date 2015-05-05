@@ -159,9 +159,10 @@ Tickets = function(self){
   };
   this.listTickets = function(tickets){
     var list = document.createElement('table'),
-    head = list.appendChild(document.createElement('tr'));
-    head.innerHTML = '<th>Business Name</th><th>Ticket Type</th><th>Due Date</th>';
-    list.className = 'sortable';
+    head = list.appendChild(document.createElement('thead')),
+    body = list.appendChild(document.createElement('tbody'));
+    head.innerHTML = '<tr><th>Business Name</th><th>Ticket Type</th><th>Due Date</th></tr>';
+    sorttable.makeSortable(list);
     for (var i=0;i<tickets.length;i++){
       var ticket = tickets[i],
       listItem = document.createElement('tr'),
@@ -176,7 +177,7 @@ Tickets = function(self){
         var modals = document.getElementsByClassName('bootbox-close-button');
         for (var i=0;i<modals.length;i++){modals[i].click();}
       };
-      list.appendChild(listItem);
+      body.appendChild(listItem);
     }
     return list;
   };
