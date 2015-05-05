@@ -297,8 +297,7 @@ function Dashboard(application, ko, bootbox) {
         listItem.innerHTML = content;
         listItem.setAttribute('client', ticket.CustomerId);
         listItem.onclick = function(){
-          console.log(ticket.CustomerId);
-          console.log(this);
+          console.log(this.client);
           //self.Tools.openClient(ticket.CustomerId);
           //var modals = document.getElementsByClassName('bootbox-close-button');
           //for (var i=0;i<modals.length;i++){modals[i].click();}
