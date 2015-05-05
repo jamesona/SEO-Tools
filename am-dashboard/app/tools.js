@@ -122,8 +122,8 @@ Tools = function(self){
     request.send( null );
     return request.responseText;
   };
-  this.getKeywords = function(client){ 
-    var activeResponse = httpRequest({
+  this.getKeywords = (client){ 
+    var activeResponse = this.httpRequest({
       url:'https://launchpad.boostability.com/WebsiteUrlApi/WebsiteUrl_SelectActiveUrls?customerId='+client,
       headers: {
         'Accept': '*/*',
@@ -134,7 +134,7 @@ Tools = function(self){
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36',
         'X-Requested-With': 'XMLHttpRequest',
     }),
-    trackingResponse = httpRequest({
+    trackingResponse = this.httpRequest({
       url:'https://launchpad.boostability.com/WebsiteKeywordTrackingApi/WebsiteKeywordTracking_Select?customerId='+client,
       headers: {
         'Accept': '*/*',
@@ -145,6 +145,6 @@ Tools = function(self){
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36',
         'X-Requested-With': 'XMLHttpRequest',
     });
-   //todo parse the recived data, and build return object
+    return {active: JSON.parse(activeResponse).Data, tracking: JSON.parse(trackingResponse).Data};
   };
 };
