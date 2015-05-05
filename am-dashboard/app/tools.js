@@ -1,4 +1,4 @@
-Tools = function(){
+Tools = function(){return {
     bobParse: function(raw){ 
       var clients = [], data = {type: 'Clients'};
       // exit on null entry
@@ -101,3 +101,4 @@ Tools = function(){
       return element;
     },
   };
+};
