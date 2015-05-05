@@ -295,9 +295,9 @@ function Dashboard(application, ko, bootbox) {
         content += '/'+ticket.ScheduledEndDate.getDate()+'/';
         content += ticket.ScheduledEndDate.getFullYear()+'</td>';
         listItem.innerHTML = content;
-        listItem.setAttribute('client', ticket.CustomerId);
+        listItem.setAttribute('data-client', ticket.CustomerId);
         listItem.onclick = function(){
-          console.log(this.client);
+          console.log(this.dataset.client);
           //self.Tools.openClient(ticket.CustomerId);
           //var modals = document.getElementsByClassName('bootbox-close-button');
           //for (var i=0;i<modals.length;i++){modals[i].click();}
