@@ -1,4 +1,4 @@
-Tools = function(){
+Tools = function(self){
   this.bobParse = function(raw){ 
     var clients = [], data = {type: 'Clients'};
     // exit on null entry
