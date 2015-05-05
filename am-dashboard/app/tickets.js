@@ -136,6 +136,7 @@ Tickets = function(self){
     }
   };
   this.countCritical = function() {
+    console.log(self);
     var criticals = self.Tickets.getCritical();
     if (criticals) {
       return '<a>Critical Tickets: <span style="color: #ff8888;font-weight: bolder;">' + criticals.length + '</span></a>';
