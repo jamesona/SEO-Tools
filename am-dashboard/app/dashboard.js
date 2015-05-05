@@ -1,7 +1,7 @@
 function Dashboard() {
   var self = this;
-  this.Tools = new Tools();
-  this.Tickets = new Tickets();
+  this.Tools = new Tools(this);
+  this.Tickets = new Tickets(this);
   this.HTML = {};
   this.HTML.dashboard = this.Tools.createElement(document.body, 'div', {
         className: 'navbar navbar-inverse navbar-fixed-bottom',
@@ -72,4 +72,13 @@ function Dashboard() {
       self.HTML.critical.innerHTML = self.Tickets.countCritical();
     },
   });
+  window.beforeunload = function(){
+    self.Tickets.tryCache();
+  };
+  window.onhashchange = function(){
+    if (window.location.href == 'https://launchpad.boostability.com/#/customerservice/activetickets'){
+      self.Tickets.tryCache();  
+    }
+  };
+  if (localStorage.getItem('ticketCache') !== null) self.Tickets.ticketArray = JSON.parse(localStorage.getItem('ticketCache'));
 }
