@@ -103,11 +103,11 @@ Tickets = function(self){
       };
   };
   this.getTickets = function() {
-    var app = ko.dataFor(app);
+    var lp = ko.dataFor(app);
     //get tickets
-    if (app.contentViewModel() !== undefined){
-      if (typeof(app.contentViewModel().myTickets) === "function"){
-        self.Tickets.ticketArray = app.contentViewModel().myTickets();
+    if (lp.contentViewModel() !== undefined){
+      if (typeof(lp.contentViewModel().myTickets) === "function"){
+        self.Tickets.ticketArray = lp.contentViewModel().myTickets();
       } 
     } else if (localStorage.getItem('ticketCache') !== null){
       self.Tickets.ticketArray = JSON.parse(localStorage.getItem('ticketCache'));
