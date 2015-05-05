@@ -296,6 +296,8 @@ function Dashboard(application, ko, bootbox) {
         content += ticket.ScheduledEndDate.getFullYear()+'</td>';
         listItem.innerHTML = content;
         listItem.onclick = function(){
+          console.log(ticket.CustomerId);
+          console.log(this);
           self.Tools.openClient(ticket.CustomerId);
           var modals = document.getElementsByClassName('bootbox-close-button');
           for (var i=0;i<modals.length;i++){modals[i].click();}
