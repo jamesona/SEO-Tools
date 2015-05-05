@@ -53,8 +53,8 @@ Tools = function(){
     })[0].children[0].children[0].children[0].children[1];
     if (ko.dataFor(window.app) !== undefined){
       view = ko.dataFor(window.app).contentViewModel();
-    } else if (ko.dataFor(self.app) !== undefined){
-      view = ko.dataFor(self.app).contentViewModel();
+    } else if (ko.dataFor(app) !== undefined){
+      view = ko.dataFor(app).contentViewModel();
     } 
     if (! view.hasOwnProperty('customersDataTable')){
       modal.remove();
@@ -84,7 +84,7 @@ Tools = function(){
     }
   };
   this.openClient = function(client) {
-    self.app.showManageCustomer(client);
+    app.showManageCustomer(client);
   };
   this.closeClient = function() {
     var buttons = document.getElementsByClassName('close'),
