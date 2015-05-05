@@ -137,7 +137,7 @@ Tools = function(self){
     });
     return JSON.parse(response);
   };
-  this.getKeywords = (client){ 
+  this.getKeywords = function(client){ 
     var activeResponse = this.httpRequest({
       url:'https://launchpad.boostability.com/WebsiteUrlApi/WebsiteUrl_SelectActiveUrls?customerId='+client,
       headers: {
