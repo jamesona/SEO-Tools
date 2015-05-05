@@ -55,7 +55,7 @@ Tickets = function(self){
         html += '<td><div>' + day + '</div>';
         //if data argument present, append key value for current day
         if (data) {
-          var today = self.Tools.today();
+          var today = (this.month+1)+'/'+day+'/'+this.year;
           if (data[today]) {
             html += '<p>'+Object.keys(data[today]).length+' '+data.type+'</p>';
             html += '<p><button class="btn btn-primary" onclick="db.Tickets.showTickets(db.Tickets.sortTickets()[\''+today+'\']);">Show Tickets</button></p>';
