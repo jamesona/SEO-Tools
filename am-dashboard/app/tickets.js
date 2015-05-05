@@ -163,6 +163,7 @@ Tickets = function(self){
     var list = document.createElement('table'),
     head = list.appendChild(document.createElement('tr'));
     head.innerHTML = '<th>Business Name</th><th>Ticket Type</th><th>Due Date</th>';
+    list.className = 'sortable';
     for (var i=0;i<tickets.length;i++){
       var ticket = tickets[i],
       listItem = document.createElement('tr'),
