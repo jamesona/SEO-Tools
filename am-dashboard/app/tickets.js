@@ -1,4 +1,4 @@
-Tickets = function(){
+Tickets = function(self){
   this.calendar = function(month, year, data) {
     if ( typeof(month) === 'object' ) {
       data = month;
