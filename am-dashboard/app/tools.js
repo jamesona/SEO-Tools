@@ -68,7 +68,7 @@ Tools = function(self){
         data = view.customersDataTable.dataSource()[0];
       }
       text += data.CustomerId+' - '+data.Name;
-      text += '[[NOTE]]: https://launchpad.boostability.com/#customerservice/customersearch/'+data.CustomerId;
+      text += '\n[[NOTE]]: https://launchpad.boostability.com/#customerservice/customersearch/'+data.CustomerId;
       text += '\n...'+data.CustomerId+' Welcome Call [['+taskDate(2)+']]';
       text += '\n......'+data.CustomerId+' 1st Welcome Call [['+taskDate(0)+']]';
       text += '\n......'+data.CustomerId+' 1st Welcome Email [['+taskDate(0)+']]';
