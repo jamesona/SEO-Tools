@@ -297,10 +297,9 @@ function Dashboard(application, ko, bootbox) {
         listItem.innerHTML = content;
         listItem.setAttribute('data-client', ticket.CustomerId);
         listItem.onclick = function(){
-          console.log(this.dataset.client);
-          //self.Tools.openClient(ticket.CustomerId);
-          //var modals = document.getElementsByClassName('bootbox-close-button');
-          //for (var i=0;i<modals.length;i++){modals[i].click();}
+          self.Tools.openClient(this.dataset.client);
+          var modals = document.getElementsByClassName('bootbox-close-button');
+          for (var i=0;i<modals.length;i++){modals[i].click();}
         };
         list.appendChild(listItem);
       }
