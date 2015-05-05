@@ -84,8 +84,8 @@ Tools = function(self){
     }
   };
   this.openClient = function(client) {
-    var app = ko.dataFor(app);
-    app.showManageCustomer(client);
+    var lp = ko.dataFor(app);
+    lp.showManageCustomer(client);
   };
   this.closeClient = function() {
     var buttons = document.getElementsByClassName('close'),
