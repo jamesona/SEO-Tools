@@ -65,6 +65,12 @@ function Dashboard() {
       calendar.draw(modal);
     },
   });
+  this.HTML.nextTicket = this.Tools.createElement(this.HTML.ticketsMenu, 'li', {
+    innerHTML: 'Next Ticket',
+    onclick: function(){
+      self.Tools.nextTicket(self.Tickets.sortTickets()[self.Tools.today()]);
+    },
+  });
   this.HTML.critical = this.Tools.createElement(this.HTML.nav, 'li', {
     innerHTML: '<a>Show Critical Count</a>',
     id: 'critical',
