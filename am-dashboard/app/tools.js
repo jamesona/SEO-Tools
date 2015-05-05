@@ -101,4 +101,8 @@ Tools = function(self){
     }
     return element;
   };
+  this.nextTicket = function(tickets){
+    self.Tools.closeClient();
+    self.Tools.openClient(tickets[0].CustomerId);
+  };
 };
