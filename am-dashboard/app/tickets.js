@@ -162,7 +162,6 @@ Tickets = function(self){
     head = list.appendChild(document.createElement('thead')),
     body = list.appendChild(document.createElement('tbody'));
     head.innerHTML = '<tr><th>Business Name</th><th>Ticket Type</th><th>Due Date</th></tr>';
-    sorttable.makeSortable(list);
     for (var i=0;i<tickets.length;i++){
       var ticket = tickets[i],
       listItem = document.createElement('tr'),
@@ -179,6 +178,7 @@ Tickets = function(self){
       };
       body.appendChild(listItem);
     }
+    sorttable.makeSortable(list);
     return list;
   };
   this.showTickets = function(tickets){
