@@ -103,6 +103,7 @@ Tickets = function(){
       };
   };
   this.getTickets = function() {
+    var app = ko.dataFor(app);
     //get tickets
     if (app.contentViewModel() !== undefined){
       if (typeof(app.contentViewModel().myTickets) === "function"){
