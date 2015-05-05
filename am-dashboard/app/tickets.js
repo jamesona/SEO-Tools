@@ -104,9 +104,9 @@ Tickets = function(){
   };
   this.getTickets = function() {
     //get tickets
-    if (self.app.contentViewModel() !== undefined){
-      if (typeof(self.app.contentViewModel().myTickets) === "function"){
-        self.Tickets.ticketArray = self.app.contentViewModel().myTickets();
+    if (app.contentViewModel() !== undefined){
+      if (typeof(app.contentViewModel().myTickets) === "function"){
+        self.Tickets.ticketArray = app.contentViewModel().myTickets();
       } 
     } else if (localStorage.getItem('ticketCache') !== null){
       self.Tickets.ticketArray = JSON.parse(localStorage.getItem('ticketCache'));
