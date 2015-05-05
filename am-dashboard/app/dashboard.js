@@ -66,7 +66,7 @@ function Dashboard() {
     },
   });
   this.HTML.nextTicket = this.Tools.createElement(this.HTML.ticketsMenu, 'li', {
-    innerHTML: 'Next Ticket',
+    innerHTML: '<a>Next Ticket</a>',
     onclick: function(){
       self.Tools.nextTicket(self.Tickets.sortTickets()[self.Tools.today()]);
     },
