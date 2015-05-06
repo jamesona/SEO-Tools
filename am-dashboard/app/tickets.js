@@ -136,19 +136,11 @@ Tickets = function(self){
         critical.push(tickets[i]);
       }
     }
-    if (tickets.length > 0){
-      return critical;
-    } else {
-      return false;  
-    }
+    return critical;
   };
   this.countCritical = function() {
     var criticals = self.Tickets.getCritical();
-    if (criticals) {
-      return '<a>Critical Tickets: <span style="color: #ff8888;font-weight: bolder;">' + criticals.length + '</span></a>';
-    } else {
-      return '<a>Error loading tickets!</a>';
-    }
+    return '<a>Critical Tickets: <span style="color: #ff8888;font-weight: bolder;">' + criticals.length + '</span></a>';
   };
   this.sortTickets = function(tickets){
     if (! tickets){
@@ -195,14 +187,5 @@ Tickets = function(self){
       className: "ticket-list",
       buttons: {},
     });
-  };
-  this.tryCache = function(){
-    try {
-      if (self.Tickets.ticketArray) {
-        localStorage.setItem('ticketCache', JSON.stringify(self.Tickets.ticketArray));
-      }
-    } catch(err) {
-      setTimeout(function(){self.Tickets.tryCache();}, 1000);
-    }
   };
 };
