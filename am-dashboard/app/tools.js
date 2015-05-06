@@ -105,25 +105,20 @@ Tools = function(self){
     self.Tools.closeClient();
     self.Tools.openClient(tickets[0].CustomerId);
   };
-  this.today = function(){
-    var date = new Date();
-    return (date.getMonth()+1)+'/'+date.getDate()+'/'+date.getFullYear();
-  }
   this.httpRequest = function(data){
-    var URL = data.url,
-    headers = data.headers,
-    request = new XMLHttpRequest();
-    request.open( "GET", URL, false );
-    for (var header in headers) {
-      if (headers.hasOwnProperty(header)) {
-          request.setRequestHeader(header, headers[header]);
+    var request = new XMLHttpRequest();
+    request.open( data.method, data.url, false );
+    for (var header in data.headers) {
+      if (data.headers.hasOwnProperty(header)) {
+          request.setRequestHeader(header, data.headers[header]);
       }
     }
-    request.send( null );
+    request.send( data.body );
     return request.responseText;
   };
   this.getClient = function(client){
     var response = this.httpRequest({
+      method: 'GET',
       url:'https://launchpad.boostability.com/CustomerApi/Customer_Select?customerId='+client,
       headers: {
         'Accept': '*/*',
@@ -139,6 +134,7 @@ Tools = function(self){
   };
   this.getKeywords = function(client){ 
     var activeResponse = this.httpRequest({
+      method: 'GET',
       url:'https://launchpad.boostability.com/WebsiteUrlApi/WebsiteUrl_SelectActiveUrls?customerId='+client,
       headers: {
         'Accept': '*/*',
@@ -151,6 +147,7 @@ Tools = function(self){
       }
     }),
     trackingResponse = this.httpRequest({
+      method: 'GET',
       url:'https://launchpad.boostability.com/WebsiteKeywordTrackingApi/WebsiteKeywordTracking_Select?customerId='+client,
       headers: {
         'Accept': '*/*',
@@ -163,5 +160,25 @@ Tools = function(self){
       }
     });
     return {active: JSON.parse(activeResponse).Data, tracking: JSON.parse(trackingResponse).Data};
+  };
+  this.getTickets = function(){
+    var today = new Date().toLocaleString(), 
+    response = this.httpRequest({
+      method: 'POST',
+      url:'https://launchpad.boostability.com/TicketApi/Ticket_SelectRange',
+      headers: {
+        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        'Accept-Encoding': 'gzip, deflate',
+        'Accept-Language': 'en-US,en;q=0.8',
+        'Cookie': document.cookie,
+        'Referer': 'https://launchpad.boostability.com/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json',
+        'Connection': 'keep-alive',
+      },
+      body: '{"statusId":"1,2","teamIds":1055,"page":1,"pageSize":1000,"startDate":"'+today+'","endDate":"'+today+'","ownership":"Mine"}'
+    });
+    return response;
   };
 };
