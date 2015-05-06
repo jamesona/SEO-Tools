@@ -102,24 +102,31 @@ Tickets = function(self){
         })();
       };
   };
-  this.getTickets = function() {
-    var lp = ko.dataFor(app);
-    //get tickets
-    if (lp.contentViewModel() !== undefined){
-      if (typeof(lp.contentViewModel().myTickets) === "function"){
-        self.Tickets.ticketArray = lp.contentViewModel().myTickets();
-      } 
-    } else if (localStorage.getItem('ticketCache') !== null){
-      self.Tickets.ticketArray = JSON.parse(localStorage.getItem('ticketCache'));
+  this.getTickets = (){
+    var response = self.Tools.httpRequest({
+      method: 'POST',
+      url:'https://launchpad.boostability.com/TicketApi/Ticket_SelectRange',
+      headers: {
+        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        'Accept-Encoding': 'gzip, deflate',
+        'Accept-Language': 'en-US,en;q=0.8',
+        'Cookie': document.cookie,
+        'Referer': 'https://launchpad.boostability.com/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36',
+        'X-Requested-With': 'XMLHttpRequest',
+        'Content-Type': 'application/json',
+        'Connection': 'keep-alive',
+      },
+      body: '{"statusId":"1,2","teamIds":1055,"page":1,"pageSize":1000,"startDate":"05/06/2014 06:00:00","endDate":"05/06/2017 06:00:00","ownership":"Mine"}'
+    });
+    tickets = JSON.parse(response).Data;
+    for (var i=0;i<tickets.length;i++){
+      tickets[i].DueDate = new Date(tickets[i].DueDate);
+      tickets[i].StartDate = new Date(tickets[i].StartDate);
+      tickets[i].ScheduledEndDate = new Date(tickets[i].ScheduledEndDate);
+      tickets[i].StatusDate = new Date(tickets[i].StatusDate);
     }
-    //return results
-    if (self.Tickets.ticketArray) {
-      localStorage.setItem('ticketCache', JSON.stringify(self.Tickets.ticketArray));
-      return self.Tickets.ticketArray;
-    } else {
-      alert('Unable to access tickets at this time!');
-      return [];
-    }
+    return tickets;
   };
   this.getCritical = function() {
     var tickets = this.getTickets(),
