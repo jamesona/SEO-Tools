@@ -68,7 +68,7 @@ function Dashboard() {
   this.HTML.nextTicket = this.Tools.createElement(this.HTML.ticketsMenu, 'li', {
     innerHTML: '<a>Next Ticket</a>',
     onclick: function(){
-      self.Tools.nextTicket(self.Tickets.sortTickets()[self.Tools.today()]);
+      self.Tools.nextTicket(self.Tickets.sortTickets()[new Date().toLocaleDateString()]);
     },
   });
   this.HTML.critical = this.Tools.createElement(this.HTML.nav, 'li', {
