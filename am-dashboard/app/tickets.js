@@ -102,7 +102,7 @@ Tickets = function(self){
         })();
       };
   };
-  this.getTickets = (){
+  this.getTickets = function(){
     var response = self.Tools.httpRequest({
       method: 'POST',
       url:'https://launchpad.boostability.com/TicketApi/Ticket_SelectRange',
