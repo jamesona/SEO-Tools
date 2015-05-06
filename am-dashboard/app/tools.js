@@ -161,7 +161,7 @@ Tools = function(self){
     });
     return {active: JSON.parse(activeResponse).Data, tracking: JSON.parse(trackingResponse).Data};
   };
-  this.getTickets = function(){
+  this.getTickets = (){
     var response = this.httpRequest({
       method: 'POST',
       url:'https://launchpad.boostability.com/TicketApi/Ticket_SelectRange',
@@ -178,6 +178,13 @@ Tools = function(self){
       },
       body: '{"statusId":"1,2","teamIds":1055,"page":1,"pageSize":1000,"startDate":"05/06/2014 06:00:00","endDate":"05/06/2017 06:00:00","ownership":"Mine"}'
     });
-    return JSON.parse(response).Data;
+    tickets = JSON.parse(response).Data;
+    for (var i=0;i<tickets.length;i++){
+      tickets[i].DueDate = new Date(tickets[i].DueDate);
+      tickets[i].StartDate = new Date(tickets[i].StartDate);
+      tickets[i].ScheduledEndDate = new Date(tickets[i].ScheduledEndDate);
+      tickets[i].StatusDate = new Date(tickets[i].StatusDate);
+    }
+    return tickets;
   };
 };
