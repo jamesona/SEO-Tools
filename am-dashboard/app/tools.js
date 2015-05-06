@@ -179,6 +179,6 @@ Tools = function(self){
       },
       body: '{"statusId":"1,2","teamIds":1055,"page":1,"pageSize":1000,"startDate":"'+today+'","endDate":"'+today+'","ownership":"Mine"}'
     });
-    return JSON.parse(response);
+    return JSON.parse(response).Data;
   };
 };
