@@ -72,19 +72,10 @@ function Dashboard() {
     },
   });
   this.HTML.critical = this.Tools.createElement(this.HTML.nav, 'li', {
-    innerHTML: '<a>Show Critical Count</a>',
+    innerHTML: self.Tickets.countCritical(),
     id: 'critical',
     onclick: function(){
-      self.HTML.critical.innerHTML = self.Tickets.countCritical();
+      self.Tickets.showTickets(self.Tickets.getCritical());
     },
   });
-  window.beforeunload = function(){
-    self.Tickets.tryCache();
-  };
-  window.onhashchange = function(){
-    if (window.location.href == 'https://launchpad.boostability.com/#/customerservice/activetickets'){
-      self.Tickets.tryCache();  
-    }
-  };
-  if (localStorage.getItem('ticketCache') !== null) self.Tickets.ticketArray = JSON.parse(localStorage.getItem('ticketCache'));
 }
