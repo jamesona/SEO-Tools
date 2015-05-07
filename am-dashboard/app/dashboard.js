@@ -88,4 +88,15 @@ function Dashboard() {
       self.Tickets.showTickets(self.Tickets.getCritical());
     },
   });
-}
+  this.HTML.openTicketFromURL = this.Tools.createElement(this.HTML.toolsMenu, 'li', {
+    innerHTML: '<a>Open Ticket from URL</a>',
+    onclick: function(){
+      var lookup = {},
+      tickets = db.Tickets.getTickets();
+      for (var i=0;i<tickets.length;i++){
+        lookup[tickets[i].TicketId] = tickets[i]
+      };
+      self.Tickets.editTicket(lookup[parseInt(self.Tools.checkOpts().ticket)])  
+    };
+  }); 
+};
