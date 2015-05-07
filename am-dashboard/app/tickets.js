@@ -85,4 +85,7 @@ Tickets = function(self){
       buttons: {},
     });
   };
+  this.editTicket = function(ticket){
+    ko.dataFor(app).headerViewModel().editTicket(ticket)
+  };
 };
