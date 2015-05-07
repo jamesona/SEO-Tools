@@ -4,6 +4,7 @@ Tickets = function(self){
       data = month;
       month = null;
     }
+    var self = data.self;
     this.current_date = new Date();
     this.day_labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     this.month_labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -49,24 +50,37 @@ Tickets = function(self){
         this.days.innerHTML = this.cells;
      
         //generate calendar
-        var html = '<tr>';
-        if ( startingDay ) html += '<td colspan="' + startingDay + '"></td>'; 
+        var days = [], rows = [];
+        rows[0] = document.createElement('tr');
+        if ( startingDay ) {
+          days[0] = rows[0].appendChild(document.createElement('td'));
+          days[0].colSpan = startingDay; 
+        }
         for (var day = 1; day <= monthLength; day++) {
-        html += '<td><div>' + day + '</div>';
-        //if data argument present, append key value for current day
-        if (data) {
-          var today = (this.month+1)+'/'+day+'/'+this.year;
-          if (data[today]) {
-            html += '<p>'+Object.keys(data[today]).length+' '+data.type+'</p>';
-            html += '<p><button class="btn btn-primary" onclick="db.Tickets.showTickets(db.Tickets.sortTickets()[\''+today+'\']);">Show Tickets</button></p>';
+          var row = rows[rows.length - 1];
+          days[day] = row.appendChild(document.createElement('td'));
+          var number = days[day].appendChild(document.createElement('div'));
+          number.innerHTML = day;
+          //if data argument present, append key value for current day
+          if (data) {
+            var today = (this.month+1)+'/'+day+'/'+this.year;
+            if (data[today]) {
+              days[day].innerHTML += '<p>'+Object.keys(data[today]).length+' '+data.type+'</p>';
+              var button = days[day].appendChild(document.createElement('a'));
+              button.className = 'btn btn-primary';
+              button.setAttribute('data-day', today);
+              button.innerHTML = 'Show Tickets';
+              button.setAttribute('onclick', 'db.Tickets.showTickets(db.Tickets.sortTickets()[this.dataset.day]);');
+            }
           }
+          if ( (day + startingDay) % 7 === 0 && day != monthLength ) rows[rows.length] = document.createElement('tr');
         }
-        html += '</td>';
-        if ( (day + startingDay) % 7 === 0 && day != monthLength ) html += '</tr><tr>';
+        if ( inLastRow ) {
+          var day = days.length - 1, row = rows.length - 1;
+          days[day] = rows[row].appendChild(document.createElement('td'));
+          days[day].colSpan = inLastRow;
         }
-        if ( inLastRow ) html += '<td colspan="' + inLastRow + '"></td>';
-        html += '</tr>';
-        this.table.innerHTML += html;
+        for (var i=0;i<rows.length;i++) {this.table.appendChild(rows[i])};
         if (ele) {
           ele.innerHTML = this.table.outerHTML;
         } else {
