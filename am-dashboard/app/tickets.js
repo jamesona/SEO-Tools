@@ -65,12 +65,13 @@ Tickets = function(self){
           if (data) {
             var today = (this.month+1)+'/'+day+'/'+this.year;
             if (data[today]) {
-              days[day].innerHTML += '<p>'+Object.keys(data[today]).length+' '+data.type+'</p>';
-              var button = days[day].appendChild(document.createElement('a'));
+              days[day].innerHTML += '<p>'+Object.keys(data[today]).length+' '+data.type+'</p><p>';
+              var button = days[day].appendChild(document.createElement('button'));
               button.className = 'btn btn-primary';
               button.setAttribute('data-day', today);
               button.innerHTML = 'Show Tickets';
               button.setAttribute('onclick', 'db.Tickets.showTickets(db.Tickets.sortTickets()[this.dataset.day]);');
+              days[day].innerHTML += '</p>';
             }
           }
           if ( (day + startingDay) % 7 === 0 && day != monthLength ) rows[rows.length] = document.createElement('tr');
