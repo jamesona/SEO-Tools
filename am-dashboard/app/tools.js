@@ -319,4 +319,15 @@ Tools = function(self){
     });
     return {active: JSON.parse(activeResponse).Data, tracking: JSON.parse(trackingResponse).Data};
   };
+  this.checkOpts = function(){
+  if (window.location.href.indexOf('?') !== -1) {
+    var opts = {},
+    params = window.location.href.split('?')[1].split('&');
+    for (var i=0;i<params.length;i++) {
+      var vals = params[i].split('=');
+      opts[vals[0]] = vals[1];
+    }
+    return opts;
+  };
+}
 };
