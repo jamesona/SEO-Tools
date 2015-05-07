@@ -67,7 +67,7 @@ function Dashboard() {
       var modals = document.getElementsByClassName('bootbox-body'), modal = modals[modals.length-1],
       data = {
         data: self.Tickets.sortTickets(),
-        self: this,
+        self: self,
         month: NaN,
         year: NaN,
       },
