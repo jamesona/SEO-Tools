@@ -94,9 +94,9 @@ function Dashboard() {
       var lookup = {},
       tickets = db.Tickets.getTickets();
       for (var i=0;i<tickets.length;i++){
-        lookup[tickets[i].TicketId] = tickets[i]
-      };
-      self.Tickets.editTicket(lookup[parseInt(self.Tools.checkOpts().ticket)])  
-    };
+        lookup[tickets[i].TicketId] = tickets[i];
+      }
+      self.Tickets.editTicket(lookup[parseInt(self.Tools.checkOpts().ticket)]);
+    },
   }); 
-};
+}
