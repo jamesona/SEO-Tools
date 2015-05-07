@@ -1,7 +1,7 @@
 Tools = function(self){
   this.calendar = function(data) {
-    if (typeOf(data.self) !== undefined) this.self = data.self;
-    if (typeOf(data.data) !== undefined) this.data = data.data;
+    if (typeof(data.self) !== undefined) this.self = data.self;
+    if (typeof(data.data) !== undefined) this.data = data.data;
     this.current_date = new Date();
     this.day_labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     this.month_labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
