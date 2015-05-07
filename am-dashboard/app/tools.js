@@ -23,7 +23,7 @@ Tools = function(self){
           }
         };
       }
-    }
+    };
     this.draw = function(ele){
         // get dates
         var startingDay = new Date(this.year, this.month, 1).getDay(),
@@ -95,7 +95,7 @@ Tools = function(self){
           this.days[day] = this.rows[row].appendChild(document.createElement('td'));
           this.days[day].colSpan = inLastRow;
         }
-        for (var i=0;i<this.rows.length;i++) {this.table.appendChild(this.rows[i])};
+        for (var i=0;i<this.rows.length;i++) {this.table.appendChild(this.rows[i]);}
         if (ele) {
           ele.innerHTML = this.table.outerHTML;
         } else {
@@ -229,8 +229,8 @@ Tools = function(self){
       var client = clients[i],
       listItem = document.createElement('tr'),
       content = '<td>'+client['Account ID']+'</td><td>'+client['Timezone']+'</td>';
-      content += '<td>'+client['Account Bucket']+'</td><td>'+client['Date of Next Ticket']+</td>;
-      content += '<td>'+client['Account Spend']+'</td><td>'+client['Engaged Status']+</td>;
+      content += '<td>'+client['Account Bucket']+'</td><td>'+client['Date of Next Ticket']+'</td>';
+      content += '<td>'+client['Account Spend']+'</td><td>'+client['Engaged Status']+'</td>';
       listItem.innerHTML = content;
       listItem.setAttribute('data-client', client['Account ID']);
       listItem.onclick = function(){
