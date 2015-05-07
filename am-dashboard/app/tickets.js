@@ -1,15 +1,12 @@
 Tickets = function(self){
-  this.calendar = function(month, year, data) {
-    if ( typeof(month) === 'object' ) {
-      data = month;
-      month = null;
-    }
-    var self = data.self;
+  this.calendar = function(data) {
+    if (typeOf(data.self) !== undefined) this.self = data.self;
+    if (typeOf(data.tickets) !== undefined) this.tickets = data.tickets;
     this.current_date = new Date();
     this.day_labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     this.month_labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    this.month = (isNaN(month) || month === null) ? this.current_date.getMonth() : month;
-    this.year = (isNaN(year) || year === null) ? this.current_date.getFullYear() : year;
+    this.month = (isNaN(data.month) || month === null) ? this.current_date.getMonth() : data.month;
+    this.year = (isNaN(data.year) || year === null) ? this.current_date.getFullYear() : data.year;
     this.draw = function(ele){
         // get dates
         var startingDay = new Date(this.year, this.month, 1).getDay(),
@@ -62,14 +59,15 @@ Tickets = function(self){
           var number = days[day].appendChild(document.createElement('div'));
           number.innerHTML = day;
           //if data argument present, append key value for current day
-          if (data) {
+          if (this.tickets) {
             var today = (this.month+1)+'/'+day+'/'+this.year;
-            if (data[today]) {
-              days[day].innerHTML += '<p>'+Object.keys(data[today]).length+' '+data.type+'</p><p>';
+            if (this.tickets[today]) {
+              days[day].innerHTML += '<p>'+Object.keys(this.tickets[today]).length+' '+data.type+'</p><p>';
               var button = days[day].appendChild(document.createElement('button'));
               button.className = 'btn btn-primary';
               button.setAttribute('data-day', today);
               button.innerHTML = 'Show Tickets';
+              //this.self.Tickets.showTickets(this.tickets[today])
               button.setAttribute('onclick', 'db.Tickets.showTickets(db.Tickets.sortTickets()[this.dataset.day]);');
               days[day].innerHTML += '</p>';
             }
@@ -91,7 +89,7 @@ Tickets = function(self){
         this.node = ele;
         // save reference to calendar object for enclosure scope
         var cal = this;
-            (function(){
+        (function(){
           // save calendar object reference for listeners
           var self = this;
           self.prev.addEventListener('click', function(){
