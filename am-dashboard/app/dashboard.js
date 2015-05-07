@@ -40,7 +40,7 @@ function Dashboard() {
       var modals = document.getElementsByClassName('bootbox-body'), modal = modals[modals.length-1],
       data = {
         data: self.Tools.bobParse(prompt('Paste BoB data')),
-        self: this,
+        self: self,
         month: NaN,
         year: NaN,
       },
