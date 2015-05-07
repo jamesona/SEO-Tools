@@ -209,6 +209,31 @@ Tools = function(self){
       modal.innerHTML = '<pre>'+text+'</pre>';
     }
   };
+  this.listClients = function(clients){
+    var list = document.createElement('table'),
+    head = list.appendChild(document.createElement('thead')),
+    body = list.appendChild(document.createElement('tbody'));
+    head.innerHTML = '<tr><th>Account ID</th><th>Timezone</th>';
+    head.innerHTML += '<th>Account Bucket</th><th>Date of Next Ticket</th>';
+    head.innerHTML += '<th>Account Spend</th><th>Engaged Status</th></tr>';
+    for (var i=0;i<clients.length;i++){
+      var client = clients[i],
+      listItem = document.createElement('tr'),
+      content = '<td>'+client['Account ID']+'</td><td>'+client['Timezone']+'</td>';
+      content += '<td>'+client['Account Bucket']+'</td><td>'+client['Date of Next Ticket']+</td>;
+      content += '<td>'+client['Account Spend']+'</td><td>'+client['Engaged Status']+</td>;
+      listItem.innerHTML = content;
+      listItem.setAttribute('data-client', client['Account ID']);
+      listItem.onclick = function(){
+        self.Tools.openClient(this.dataset.client);
+        var modals = document.getElementsByClassName('bootbox-close-button');
+        for (var i=0;i<modals.length;i++){modals[i].click();}
+      };
+      body.appendChild(listItem);
+    }
+    sorttable.makeSortable(list);
+    return list;
+  };
   this.openClient = function(client) {
     var lp = ko.dataFor(app);
     lp.showManageCustomer(client);
