@@ -11,7 +11,16 @@ Tools = function(self){
       var buttons = document.getElementsByClassName('cal-btn');
       for (var i=0;i<buttons.length;i++){
         buttons[i].onclick = function(){
-          self.Tickets.showTickets(data[this.dataset.day]);
+          if (data.type == 'Tickets') {
+            self.Tickets.showTickets(data[this.dataset.day]);
+          } else {
+            bootbox.dialog({
+              message: self.Tools.listClients(data[this.dataset.day]),
+              title: "Clients (click row to open client)",
+              className: "ticket-list",
+              buttons: {},
+            });
+          }
         };
       }
     }
