@@ -38,8 +38,13 @@ function Dashboard() {
         buttons: {},
       });
       var modals = document.getElementsByClassName('bootbox-body'), modal = modals[modals.length-1],
-      data = self.Tools.bobParse(prompt('Paste BoB data')),
-      calendar = new self.Tickets.calendar(data);
+      data = {
+        data: self.Tools.bobParse(prompt('Paste BoB data')),
+        self: this,
+        month: NaN,
+        year: NaN,
+      },
+      calendar = new self.Tools.calendar(data);
       calendar.draw(modal);
     },
   });
@@ -60,8 +65,13 @@ function Dashboard() {
         buttons: {},
       });
       var modals = document.getElementsByClassName('bootbox-body'), modal = modals[modals.length-1],
-      data = self.Tickets.sortTickets(),
-      calendar = new self.Tickets.calendar(data);
+      data = {
+        data: self.Tickets.sortTickets(),
+        self: this,
+        month: NaN,
+        year: NaN,
+      },
+      calendar = new self.Tools.calendar(data);
       calendar.draw(modal);
     },
   });
