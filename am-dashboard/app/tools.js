@@ -1,12 +1,20 @@
 Tools = function(self){
-  this.calendar = function(data) {
-    if (typeof(data.self) !== undefined) this.self = data.self;
-    if (typeof(data.data) !== undefined) this.data = data.data;
+  this.calendar = function (params) {
+    if (typeof(params.self) !== undefined) {this.self = self = params.self;}
+    if (typeof(params.data) !== undefined) {this.data = data = params.data;}
     this.current_date = new Date();
     this.day_labels = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     this.month_labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     this.month = (isNaN(data.month) || month === null) ? this.current_date.getMonth() : data.month;
     this.year = (isNaN(data.year) || year === null) ? this.current_date.getFullYear() : data.year;
+    this.registerButtons = function(){
+      var buttons = document.getElementsByClassName('cal-btn');
+      for (var i=0;i<buttons.length;i++){
+        buttons[i].onclick = function(){
+          self.Tickets.showTickets(data[this.dataset.day]);
+        };
+      }
+    }
     this.draw = function(ele){
         // get dates
         var startingDay = new Date(this.year, this.month, 1).getDay(),
@@ -47,46 +55,44 @@ Tools = function(self){
         this.days.innerHTML = this.cells;
      
         //generate calendar
-        var days = [], rows = [];
-        rows[0] = document.createElement('tr');
+        this.days = [];
+        this.rows = [];
+        this.rows[0] = document.createElement('tr');
         if ( startingDay ) {
-          days[0] = rows[0].appendChild(document.createElement('td'));
-          days[0].colSpan = startingDay; 
+          this.days[0] = this.rows[0].appendChild(document.createElement('td'));
+          this.days[0].colSpan = startingDay; 
         }
         for (var day = 1; day <= monthLength; day++) {
-          var row = rows[rows.length - 1];
-          days[day] = row.appendChild(document.createElement('td'));
-          var number = days[day].appendChild(document.createElement('div'));
+          var row = this.rows[this.rows.length - 1];
+          this.days[day] = row.appendChild(document.createElement('td'));
+          var number = this.days[day].appendChild(document.createElement('div'));
           number.innerHTML = day;
           //if data argument present, append key value for current day
-          if (this.data) {
+          if (data) {
             var today = (this.month+1)+'/'+day+'/'+this.year;
-            if (this.data[today]) {
-              days[day].innerHTML += '<p>'+Object.keys(this.data[today]).length+' '+this.data.type+'</p><p>';
-              var button = days[day].appendChild(document.createElement('button'));
-              button.className = 'btn btn-primary';
+            if (data[today]) {
+              this.days[day].innerHTML += '<p>'+Object.keys(data[today]).length+' '+data.type+'</p><p>';
+              var button = this.days[day].appendChild(document.createElement('button'));
+              button.className = 'btn btn-primary cal-btn';
               button.setAttribute('data-day', today);
-              button.setAttribute('data-data', this.data[today]);
-              button.innerHTML = 'Show '+this.data.type;
-              //this.self.Tickets.showTickets(this.tickets[today])
-              //this.self.Tickets.showClients(this.tickets[today])
-              button.setAttribute('onclick', 'db.Tickets.showTickets(db.Tickets.sortTickets()[this.dataset.day]);');
-              days[day].innerHTML += '</p>';
+              button.innerHTML = 'Show '+data.type;
+              this.days[day].innerHTML += '</p>';
             }
           }
-          if ( (day + startingDay) % 7 === 0 && day != monthLength ) rows[rows.length] = document.createElement('tr');
+          if ( (day + startingDay) % 7 === 0 && day != monthLength ) this.rows[this.rows.length] = document.createElement('tr');
         }
         if ( inLastRow ) {
-          var day = days.length - 1, row = rows.length - 1;
-          days[day] = rows[row].appendChild(document.createElement('td'));
-          days[day].colSpan = inLastRow;
+          var day = this.days.length - 1, row = this.rows.length - 1;
+          this.days[day] = this.rows[row].appendChild(document.createElement('td'));
+          this.days[day].colSpan = inLastRow;
         }
-        for (var i=0;i<rows.length;i++) {this.table.appendChild(rows[i])};
+        for (var i=0;i<this.rows.length;i++) {this.table.appendChild(this.rows[i])};
         if (ele) {
           ele.innerHTML = this.table.outerHTML;
         } else {
           return this.table.outerHTML;
         }
+        this.registerButtons();
         // save reference to dom node in object
         this.node = ele;
         // save reference to calendar object for enclosure scope
@@ -97,10 +103,12 @@ Tools = function(self){
           self.prev.addEventListener('click', function(){
             cal.month--;
             cal.draw(cal.node);
+            cal.registerButtons();
           });
           self.next.addEventListener('click', function(){
             cal.month++;
             cal.draw(cal.node);
+            cal.registerButtons();
           });
           document.onkeydown = function(e) {
             e = e || window.event;
