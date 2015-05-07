@@ -62,9 +62,9 @@
   border: 1px solid black;
   padding: 4px;
 }
-.ticket-list tr:first-Child:hover {
-  background-color: initial;
-}
 .ticket-list tr:hover {
   background-color: rgba(30,30,30,0.1);
+}
+.ticket-list thead tr:hover {
+  background-color: initial;
 }
